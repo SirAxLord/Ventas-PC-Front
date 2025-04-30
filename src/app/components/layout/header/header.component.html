@@ -1,0 +1,42 @@
+<mat-toolbar color="primary" class="sticky-header mat-elevation-z4"> <div class="toolbar-section logo-section">
+    <mat-icon class="logo-icon">computer</mat-icon>
+    <span class="logo-text">Valenzo's PC</span>
+  </div>
+
+  <span class="spacer"></span>
+
+  <div class="toolbar-section navigation-section hidden md:flex">
+    <a mat-button href="#">Home</a> <a mat-button href="#products">Products</a>
+    <a mat-button href="#services">Services</a>
+    <a mat-button href="#about">About</a>
+    <a mat-button href="#contact">Contact</a>
+  </div>
+
+  <div class="toolbar-section actions-section hidden md:flex">
+    <button mat-icon-button aria-label="Shopping cart" class="cart-button">
+      <mat-icon>shopping_cart</mat-icon>
+    </button>
+    <button mat-flat-button color="accent" class="shop-now-button">Shop Now</button> </div>
+
+  <div class="toolbar-section mobile-menu-section md:hidden">
+    <button mat-icon-button [matMenuTriggerFor]="mobileMenu" aria-label="Toggle menu">
+      <mat-icon>menu</mat-icon>
+    </button>
+  </div>
+
+</mat-toolbar>
+
+<mat-menu #mobileMenu="matMenu">
+  <a mat-menu-item href="#">Home</a> <a mat-menu-item href="#products">Products</a>
+  <a mat-menu-item href="#services">Services</a>
+  <a mat-menu-item href="#about">About</a>
+  <a mat-menu-item href="#contact">Contact</a>
+  <mat-divider></mat-divider>
+  <a mat-menu-item href="#">
+    <mat-icon>shopping_cart</mat-icon>
+    <span>Shopping Cart</span>
+  </a>
+   <a mat-menu-item href="#"> <mat-icon>store</mat-icon>
+     <span>Shop Now</span>
+   </a>
+</mat-menu>

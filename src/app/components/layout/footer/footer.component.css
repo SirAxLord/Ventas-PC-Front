@@ -1,0 +1,77 @@
+/* --- Estilos Generales del Footer Toolbar --- */
+.footer-toolbar {
+    /* Quitamos el color de fondo por defecto de mat-toolbar si no queremos el del tema */
+    background-color: white; /* O el color de fondo que desees */
+    color: #333; /* Color de texto base para el footer */
+    border-top: 1px solid #e0e0e0; /* Borde superior como en el original (border-t) */
+    padding: 8px 16px; /* Padding vertical y horizontal (py-6 md:py-0 en original) */
+    min-height: 56px; /* Altura mínima similar a md:h-16 */
+    justify-content: space-between;
+    flex-wrap: wrap; /* Permite que los elementos pasen a la siguiente línea en pantallas muy pequeñas */
+    gap: 16px; /* Espacio entre secciones si se envuelven */
+  }
+  
+  /* --- Secciones dentro del Footer --- */
+  .footer-section {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Espacio entre icono y texto, o entre links */
+  }
+  
+  /* --- Copyright --- */
+  .copyright-section .footer-icon {
+    color: #00A878; /* Verde Valenzo */
+    font-size: 20px; /* Ajusta tamaño (h-5 w-5) */
+    height: 20px;
+    width: 20px;
+  }
+  
+  .copyright-section .copyright-text {
+    font-size: 0.875rem; /* text-sm */
+    color: #003366; /* Azul Valenzo */
+    font-weight: 500; /* font-medium */
+  }
+  
+  /* --- Links del Footer --- */
+  .links-section .footer-link {
+    font-size: 0.75rem; /* text-xs sm:text-sm */
+    color: #555; /* Color base para los links */
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  
+  .links-section .footer-link:hover {
+    color: #00A878; /* Verde Valenzo al pasar el mouse */
+    text-decoration: underline; /* Subrayado al pasar el mouse */
+    text-underline-offset: 4px; /* underline-offset-4 */
+  }
+  
+  /* Ajustes responsivos si son necesarios */
+  @media (min-width: 640px) { /* sm: */
+    .links-section .footer-link {
+      font-size: 0.875rem; /* text-sm */
+    }
+  }
+  
+  /* --- Espaciador (si es necesario) --- */
+  .spacer {
+    flex: 1 1 auto;
+  }
+  
+  /* Ajuste para pantallas pequeñas donde todo podría apilarse */
+  @media (max-width: 600px) { /* Ajusta este breakpoint si es necesario */
+    .footer-toolbar {
+      flex-direction: column; /* Apila las secciones verticalmente */
+      height: auto; /* Permite que la altura crezca */
+      min-height: unset;
+      padding: 16px; /* Más padding vertical */
+      justify-content: center; /* Centra el contenido */
+      text-align: center;
+    }
+    .spacer {
+       display: none; /* Oculta el espaciador en modo columna */
+    }
+    .footer-section {
+      justify-content: center; /* Centra items dentro de la sección */
+    }
+  }

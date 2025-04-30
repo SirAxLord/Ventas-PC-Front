@@ -1,0 +1,92 @@
+/* --- Contenedor Principal --- */
+.products-container {
+    width: 100%;
+    padding-top: 3rem; /* py-12 */
+    padding-bottom: 3rem;
+  }
+  /* Padding responsivo */
+  @media (min-width: 768px) { /* md: */
+    .products-container { padding-top: 6rem; padding-bottom: 6rem; } /* md:py-24 */
+  }
+  @media (min-width: 1024px) { /* lg: */
+    .products-container { padding-top: 8rem; padding-bottom: 8rem; } /* lg:py-32 */
+  }
+  
+  /* --- Bloque de Texto Introductorio --- */
+  .intro-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* justify-center */
+    justify-content: center;
+    gap: 0.5rem; /* space-y-2 (aproximado) */
+    text-align: center; /* text-center */
+    margin-bottom: 2rem; /* Separación antes de la grid (mt-8) */
+    padding-left: 1rem; /* px-4 */
+    padding-right: 1rem;
+  }
+  @media (min-width: 768px) { /* md: */
+    .intro-text {
+       padding-left: 1.5rem; /* md:px-6 */
+       padding-right: 1.5rem;
+    }
+  }
+  
+  
+  .badge {
+    display: inline-block;
+    border-radius: 0.5rem; /* rounded-lg */
+    background-color: rgba(12, 64, 154, 0.1); /* bg-[#00A878]/10 */
+    padding: 0.25rem 0.75rem; /* px-3 py-1 */
+    font-size: 0.875rem; /* text-sm */
+    color: #00A878; /* text-[#00A878] */
+  }
+  
+  .section-title {
+    font-size: 1.875rem; /* text-3xl */
+    font-weight: 700; /* font-bold */
+    letter-spacing: -0.025em; /* tracking-tighter */
+    color: #003366; /* text-[#003366] */
+  }
+  /* Tamaños responsivos del título */
+  @media (min-width: 640px) { /* sm: */
+    .section-title { font-size: 2.25rem; } /* sm:text-4xl */
+  }
+  @media (min-width: 768px) { /* md: */
+    .section-title { font-size: 3rem; } /* md:text-5xl */
+  }
+  
+  .section-description {
+    max-width: 900px; /* max-w-[900px] */
+    color: #6b7280; /* text-gray-500 */
+    margin-left: auto;
+    margin-right: auto; /* Centrado */
+  }
+  /* Tamaños responsivos de la descripción */
+  @media (min-width: 768px) { /* md: */
+    .section-description { font-size: 1.125rem; line-height: 1.75rem; } /* md:text-xl/relaxed */
+  }
+  @media (min-width: 1024px) { /* lg: */
+    .section-description { font-size: 1rem; line-height: 1.75rem; } /* lg:text-base/relaxed */
+  }
+  @media (min-width: 1280px) { /* xl: */
+    .section-description { font-size: 1.125rem; line-height: 1.75rem; } /* xl:text-xl/relaxed */
+  }
+  
+  
+  /* --- Cuadrícula de Productos --- */
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(1, minmax(0, 1fr)); /* 1 columna por defecto */
+    gap: 1.5rem; /* gap-6 */
+    max-width: 1024px; /* max-w-5xl (ajustado, 5xl es ~1024px) */
+    margin: 2rem auto 0; /* mt-8 + centrado horizontal */
+    padding-left: 1rem; /* Coincide con padding de intro-text */
+    padding-right: 1rem;
+  }
+  /* Grid responsivo */
+  @media (min-width: 768px) { /* md: */
+    .products-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } /* md:grid-cols-2 */
+  }
+  @media (min-width: 1024px) { /* lg: */
+    .products-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } /* lg:grid-cols-3 */
+  }

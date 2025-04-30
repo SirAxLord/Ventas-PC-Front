@@ -1,0 +1,13 @@
+<section class="services-container">
+    <div class="intro-text">
+      <div class="badge">Our Services</div>
+      <h2 class="section-title">Expert Tech Solutions</h2>
+      <p class="section-description">
+        From repairs to custom builds, our technicians are here to help.
+      </p>
+    </div>
+  
+    <div class="services-grid">
+      <app-service-card *ngFor="let service of services" [service]="service"></app-service-card>
+    </div>
+  </section>

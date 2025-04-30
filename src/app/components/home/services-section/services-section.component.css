@@ -1,0 +1,86 @@
+/* --- Contenedor Principal --- */
+.services-container {
+  width: 100%;
+  padding-top: 3rem; /* py-12 */
+  padding-bottom: 3rem;
+  background-color: #f3f4f6; /* bg-gray-100 (aproximado) */
+}
+/* Padding responsivo */
+@media (min-width: 768px) { /* md: */
+  .services-container { padding-top: 6rem; padding-bottom: 6rem; } /* md:py-24 */
+}
+@media (min-width: 1024px) { /* lg: */
+  .services-container { padding-top: 8rem; padding-bottom: 8rem; } /* lg:py-32 */
+}
+
+/* --- Bloque de Texto Introductorio (Idéntico a products-section.css) --- */
+.intro-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  text-align: center;
+  margin-bottom: 2rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+@media (min-width: 768px) { /* md: */
+  .intro-text { padding-left: 1.5rem; padding-right: 1.5rem; }
+}
+
+.badge {
+  display: inline-block;
+  border-radius: 0.5rem;
+  background-color: rgba(0, 168, 120, 0.1); /* bg-[#00A878]/10 */
+  padding: 0.25rem 0.75rem;
+  font-size: 0.875rem;
+  color: #00A878; /* text-[#00A878] */
+}
+
+.section-title {
+  font-size: 1.875rem; /* text-3xl */
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  color: #003366; /* text-[#003366] */
+}
+@media (min-width: 640px) { /* sm: */
+  .section-title { font-size: 2.25rem; } /* sm:text-4xl */
+}
+@media (min-width: 768px) { /* md: */
+  .section-title { font-size: 3rem; } /* md:text-5xl */
+}
+
+.section-description {
+  max-width: 900px;
+  color: #6b7280; /* text-gray-500 */
+  margin-left: auto;
+  margin-right: auto;
+}
+@media (min-width: 768px) { /* md: */
+  .section-description { font-size: 1.125rem; line-height: 1.75rem; } /* md:text-xl/relaxed */
+}
+@media (min-width: 1024px) { /* lg: */
+  .section-description { font-size: 1rem; line-height: 1.75rem; } /* lg:text-base/relaxed */
+}
+@media (min-width: 1280px) { /* xl: */
+  .section-description { font-size: 1.125rem; line-height: 1.75rem; } /* xl:text-xl/relaxed */
+}
+
+/* --- Cuadrícula de Servicios --- */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 2rem; /* gap-8 (más grande que en productos) */
+  max-width: 1024px; /* max-w-5xl */
+  margin: 2rem auto 0; /* mt-8 + centrado */
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+/* Grid responsivo */
+@media (min-width: 768px) { /* md: */
+  .services-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } /* md:grid-cols-2 */
+}
+@media (min-width: 1024px) { /* lg: */
+  .services-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } /* lg:grid-cols-3 */
+}

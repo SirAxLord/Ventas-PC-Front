@@ -1,0 +1,139 @@
+/* --- Contenedor Principal de la Sección --- */
+.hero-container {
+    width: 100%;
+    padding-top: 3rem; /* py-12 */
+    padding-bottom: 3rem; /* py-12 */
+    background-color: #003366; /* bg-[#003366] */
+    color: white; /* text-white */
+  }
+  
+  /* Ajustes de padding responsivos */
+  @media (min-width: 768px) { /* md: */
+    .hero-container {
+      padding-top: 6rem; /* md:py-24 */
+      padding-bottom: 6rem;
+    }
+  }
+  @media (min-width: 1024px) { /* lg: */
+    .hero-container {
+      padding-top: 8rem; /* lg:py-32 */
+      padding-bottom: 8rem;
+    }
+  }
+  
+  /* --- Contenedor del Contenido (Simula 'container' de Tailwind) --- */
+  .hero-content-grid {
+    max-width: 1280px; /* Ajusta según necesidad (similar a container) */
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;  /* px-4 */
+    padding-right: 1rem; /* px-4 */
+    display: grid;
+    gap: 1.5rem; /* gap-6 */
+    align-items: center; /* items-center */
+  }
+  
+  /* Grid responsivo de 2 columnas */
+  @media (min-width: 1024px) { /* lg: */
+    .hero-content-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr)); /* lg:grid-cols-2 */
+      gap: 3rem; /* lg:gap-12 */
+      padding-left: 1.5rem;  /* md:px-6 */
+      padding-right: 1.5rem; /* md:px-6 */
+    }
+  }
+  
+  /* --- Columna de Texto --- */
+  .text-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem; /* space-y-4 */
+  }
+  
+  .headline {
+    font-size: 1.875rem; /* text-3xl */
+    font-weight: 700; /* font-bold */
+    letter-spacing: -0.025em; /* tracking-tighter */
+  }
+  @media (min-width: 640px) { /* sm: */
+    .headline {
+      font-size: 2.25rem; /* sm:text-4xl */
+    }
+  }
+   @media (min-width: 768px) { /* md: */
+    .headline {
+      font-size: 3rem; /* md:text-5xl */
+    }
+  }
+  
+  
+  .subheadline {
+    max-width: 600px; /* max-w-[600px] */
+    color: #e5e7eb; /* text-gray-200 (aproximado) */
+    font-size: 1.125rem; /* md:text-xl */
+    line-height: 1.75rem; /* md:leading-relaxed */
+  }
+  @media (min-width: 1024px) { /* lg: */
+    .subheadline {
+      font-size: 1rem; /* lg:text-base */
+      line-height: 1.75rem; /* lg:leading-relaxed */
+    }
+  }
+  @media (min-width: 1280px) { /* xl: */
+     .subheadline {
+       font-size: 1.125rem; /* xl:text-xl */
+       line-height: 1.75rem; /* xl:leading-relaxed */
+     }
+  }
+  
+  /* --- Grupo de Botones --- */
+  .button-group {
+    display: flex;
+    flex-direction: column; /* Apilados por defecto */
+    gap: 0.5rem; /* gap-2 */
+  }
+   @media (min-width: 400px) { /* min-[400px]: */
+     .button-group {
+       flex-direction: row; /* En fila a partir de 400px */
+     }
+   }
+  
+  .cta-button {
+    /* El color 'accent' se define en el tema, pero si quieres el verde exacto: */
+    background-color: #00A878 !important;
+    color: white !important;
+  }
+  .cta-button:hover {
+    background-color: #008C66 !important;
+  }
+  .cta-button mat-icon {
+     margin-left: 4px; /* ml-1 */
+     font-size: 1rem; /* h-4 w-4 */
+     height: 1rem;
+     width: 1rem;
+   }
+  
+  .secondary-button {
+    /* Botón con borde */
+    border-color: white !important; /* Asegura borde blanco */
+    color: white !important; /* Asegura texto blanco */
+  }
+  .secondary-button:hover {
+    background-color: rgba(255, 255, 255, 0.1) !important; /* hover:bg-white/10 */
+  }
+  
+  /* --- Columna de Imagen --- */
+  .image-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto; /* lg:ml-auto (empuja a la derecha en layout de 2 col) */
+    margin-right: auto; /* mx-auto (centrado por defecto) */
+  }
+  
+  .hero-image {
+    border-radius: 0.5rem; /* rounded-lg */
+    object-fit: cover; /* object-cover */
+    max-width: 100%;
+    height: auto; /* Mantiene la proporción */
+  }

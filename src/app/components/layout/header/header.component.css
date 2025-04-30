@@ -1,0 +1,102 @@
+/* --- Estilos Generales de la Toolbar --- */
+.sticky-header {
+    position: sticky;
+    top: 0;
+    z-index: 1000; /* Asegura que esté sobre otro contenido */
+  }
+  
+  /* Ajusta el padding si es necesario, mat-toolbar ya tiene algo */
+  mat-toolbar {
+    justify-content: space-between; /* Distribuye el espacio entre los elementos principales */
+    padding: 0 16px; /* Padding horizontal por defecto */
+  }
+  
+  /* Contenedor flexible para las secciones dentro de la toolbar */
+  .toolbar-section {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Espacio entre elementos dentro de una sección */
+  }
+  
+  /* --- Logo --- */
+  .logo-section .logo-icon {
+    color: #00A878; /* Verde específico del diseño original */
+    /* Puedes ajustar el tamaño si es necesario */
+    /* font-size: 28px; height: 28px; width: 28px; */
+  }
+  
+  .logo-section .logo-text {
+    font-size: 1.25rem; /* text-xl */
+    font-weight: bold;
+    color: #003366; /* Azul específico del diseño original */
+    margin-left: 4px; /* Pequeño espacio después del icono */
+  }
+  
+  /* --- Espaciador --- */
+  .spacer {
+    flex: 1 1 auto; /* Ocupa el espacio disponible empujando elementos */
+  }
+  
+  /* --- Navegación --- */
+  .navigation-section a {
+    /* Estilo para los links de navegación si es necesario */
+    /* Por ejemplo, para el hover como en el original */
+    transition: color 0.3s ease;
+  }
+  
+  .navigation-section a:hover {
+     color: #00A878; /* Color verde al pasar el mouse */
+     /* Nota: Si usas color="primary" en mat-toolbar, el color del texto por defecto será el de contraste del tema (blanco o negro). */
+     /* Puedes necesitar ajustar el color base o usar clases CSS específicas. */
+  }
+  
+  /* --- Acciones --- */
+  .actions-section .cart-button {
+    /* Estilos específicos para el botón del carrito si son necesarios */
+  }
+  
+  .actions-section .shop-now-button {
+    /* Usa el color 'accent' definido en tu tema de Material */
+    /* Si quieres los colores exactos del diseño original: */
+     background-color: #00A878 !important; /* Verde */
+     color: white !important;
+  }
+  .actions-section .shop-now-button:hover {
+     background-color: #008C66 !important; /* Verde más oscuro */
+  }
+  
+  
+  /* --- Responsividad (simulando clases de Tailwind) --- */
+  /* Ocultar por defecto (equivalente a 'hidden') */
+  .hidden {
+    display: none;
+  }
+  
+  /* Mostrar como flex a partir de 'md' (768px por defecto en Tailwind) */
+  @media (min-width: 768px) {
+    .md\:flex {
+      display: flex;
+    }
+    .md\:hidden {
+      display: none;
+    }
+  }
+  
+  /* Mostrar por defecto y ocultar a partir de 'md' */
+  @media (max-width: 767.98px) {
+    .hidden.md\:flex { /* Oculta los elementos de desktop en móvil */
+       display: none;
+    }
+    .md\:hidden { /* Muestra el botón de menú móvil */
+       display: flex; /* O 'block' o 'inline-flex' según necesites */
+    }
+  }
+  
+  /* Ajustes específicos para el menú móvil si son necesarios */
+  .mobile-menu-section {
+    /* Asegúrate de que el botón sea visible en móvil */
+  }
+  
+  /* Puedes darle estilos a los items dentro del mat-menu si quieres */
+  /* .mat-mdc-menu-item { ... } */
+  /* .mat-mdc-menu-item .mat-icon { margin-right: 8px; } */

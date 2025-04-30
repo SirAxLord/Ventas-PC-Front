@@ -1,0 +1,78 @@
+/* --- Contenedor Principal de la Tarjeta --- */
+.product-card-container {
+    /* Para simular flex y justify-between del original si es necesario */
+    display: flex;
+    background-color: rgb(12, 64, 154);
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%; /* Asegura que todas las tarjetas en una fila tengan la misma altura si el grid lo permite */
+  }
+  
+  /* --- Cabecera --- */
+  .product-card-header {
+    padding-bottom: 8px; /* Un poco de espacio antes del contenido */
+    color: #ffffff;
+  }
+  
+  /* Contenedor y estilo del icono */
+  .header-icon-container {
+     /* mat-card-avatar ya aplica algunos estilos, podemos ajustarlos */
+  }
+  .header-icon {
+    color: #00A878; /* text-[#00A878] */
+    font-size: 40px; /* Ajusta según el tamaño deseado (h-10 w-10 -> 40px) */
+    height: 40px;
+    width: 40px;
+    /* Centrado vertical si es necesario */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* --- Contenido --- */
+  .product-card-content {
+    padding-top: 8px;
+    padding-bottom: 8px;
+    /* Asegura que el contenido pueda crecer si es necesario */
+    flex-grow: 1;
+  }
+  
+  /* Imagen del producto */
+  .product-image {
+    display: block; /* Para que margen auto funcione */
+    width: 100%; /* Ocupa el ancho del contenedor */
+    max-height: 200px; /* Altura máxima */
+    object-fit: cover; /* object-cover */
+    border-radius: 0.5rem; /* rounded-lg */
+    margin-bottom: 1rem; /* Espacio antes de la descripción */
+  }
+  
+  /* Descripción */
+  .product-description {
+    font-size: 0.875rem; /* text-sm */
+    color: #ffffff; /* text-gray-500 (aproximado) */
+    /* Añade más estilos si son necesarios */
+  }
+  
+  
+  /* --- Pie de Tarjeta (Acciones) --- */
+  .product-card-footer {
+    display: flex;
+    justify-content: space-between; /* Empuja precio y botón a los extremos */
+    align-items: center;
+    padding: 8px 16px !important; /* Ajusta el padding del footer de mat-card-actions */
+  }
+  
+  .product-price {
+    font-weight: 700; /* font-bold */
+    color: #ffffff; /* text-[#003366] */
+  }
+  
+  .add-to-cart-button {
+    /* Usa el color 'accent' del tema o sobrescribe */
+     background-color: #00A878 !important;
+     color: white !important;
+  }
+  .add-to-cart-button:hover {
+     background-color: #00858c !important;
+  }
