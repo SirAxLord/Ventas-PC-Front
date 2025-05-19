@@ -1,76 +1,76 @@
 <section class="contact-container">
     <div class="intro-text">
-      <h2 class="section-title">Get In Touch</h2>
+      <h2 class="section-title">Contáctanos</h2>
       <p class="section-description">
-        Have questions or need assistance? We're here to help!
+        ¿Tienes preguntas o necesitas ayuda? ¡Estamos aquí para ayudarte!
       </p>
     </div>
   
     <div class="contact-grid">
       <div class="info-column">
         <div class="info-block">
-          <h3 class="info-title">Visit Our Store</h3>
+          <h3 class="info-title">Visítanos</h3>
           <p class="info-text">Sagitario #324 Col. Esmeralda</p>
-          <p class="info-text">San Luis Potosí, Mexico</p>
+          <p class="info-text">San Luis Potosí, México</p>
         </div>
         <div class="info-block">
-          <h3 class="info-title">Store Hours</h3>
-          <p class="info-text">Monday - Friday: 10am - 8pm</p>
-          <p class="info-text">Saturday:10am - 8pm</p>
-          <p class="info-text">Sunday: Closed</p>
+          <h3 class="info-title">Horario de tienda</h3>
+          <p class="info-text">Lunes - Viernes: 10am - 8pm</p>
+          <p class="info-text">Sábado: 10am - 8pm</p>
+          <p class="info-text">Domingo: Cerrado</p>
         </div>
         <div class="info-block">
-          <h3 class="info-title">Contact Information</h3>
-          <p class="info-text">Phone: (+52) 444-179-0651</p>
-          <p class="info-text">Email: infovalenzospc.com</p>
+          <h3 class="info-title">Información de contacto</h3>
+          <p class="info-text">Teléfono: (+52) 444-179-0651</p>
+          <p class="info-text">Correo electrónico: infovalenzospc.com</p>
         </div>
       </div>
   
       <div class="form-column">
         <div class="form-container">
-          <h3 class="form-title">Send Us a Message</h3>
+          <h3 class="form-title">Envíanos un mensaje</h3>
           <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
             <div class="form-row">
               <mat-form-field appearance="outline" class="form-field half-width">
-                <mat-label>First name</mat-label>
-                <input matInput placeholder="John" formControlName="firstName">
+                <mat-label>Nombre</mat-label>
+                <input matInput placeholder="Juan" formControlName="firstName">
                 <mat-error *ngIf="contactForm.get('firstName')?.hasError('required') && contactForm.get('firstName')?.touched">
-                  First name is required
+                  El nombre es obligatorio
                 </mat-error>
               </mat-form-field>
               <mat-form-field appearance="outline" class="form-field half-width">
-                <mat-label>Last name</mat-label>
-                <input matInput placeholder="Doe" formControlName="lastName">
+                <mat-label>Apellido</mat-label>
+                <input matInput placeholder="Pérez" formControlName="lastName">
                 <mat-error *ngIf="contactForm.get('lastName')?.hasError('required') && contactForm.get('lastName')?.touched">
-                  Last name is required
+                  El apellido es obligatorio
                 </mat-error>
               </mat-form-field>
             </div>
   
             <mat-form-field appearance="outline" class="form-field full-width">
-              <mat-label>Email</mat-label>
-              <input matInput type="email" placeholder="johndoe@example.com" formControlName="email">
+              <mat-label>Correo electrónico</mat-label>
+              <input matInput type="email" placeholder="juanperez@example.com" formControlName="email">
                <mat-error *ngIf="contactForm.get('email')?.hasError('required') && contactForm.get('email')?.touched">
-                 Email is required
+                 El correo electrónico es obligatorio
                </mat-error>
                <mat-error *ngIf="contactForm.get('email')?.hasError('email') && contactForm.get('email')?.touched">
-                 Please enter a valid email address
+                 Por favor, introduce una dirección de correo válida
                </mat-error>
             </mat-form-field>
   
             <mat-form-field appearance="outline" class="form-field full-width">
-              <mat-label>Message</mat-label>
-              <textarea matInput placeholder="Type your message here." formControlName="message" rows="4"></textarea>
+              <mat-label>Mensaje</mat-label>
+              <textarea matInput placeholder="Escribe tu mensaje aquí." formControlName="message" rows="4"></textarea>
               <mat-error *ngIf="contactForm.get('message')?.hasError('required') && contactForm.get('message')?.touched">
-                Message is required
+                El mensaje es obligatorio
               </mat-error>
             </mat-form-field>
   
             <button mat-flat-button color="accent" type="submit" class="submit-button" [disabled]="contactForm.invalid">
-              Send Message
+              Enviar mensaje
             </button>
           </form>
         </div>
       </div>
     </div>
-  </section>
+</section>

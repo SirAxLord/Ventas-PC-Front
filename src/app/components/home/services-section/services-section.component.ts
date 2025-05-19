@@ -23,33 +23,33 @@ export class ServicesSectionComponent {
   // Array con los datos de los servicios
   services: Service[] = [
     {
-      title: "Custom PC Builds",
-      description: "Tailored gaming or workstation PCs built to your specifications",
+      title: "Armado de PC Personalizado",
+      description: "PCs de gaming o estaciones de trabajo adaptadas a tus especificaciones",
       iconName: "build", // Icono Material
     },
     {
-      title: "Hardware Upgrades",
-      description: "Boost your system's performance with the latest components",
+      title: "Actualización de Hardware",
+      description: "Mejora el rendimiento de tu sistema con los componentes más recientes",
       iconName: "upgrade", // Icono Material
     },
     {
-      title: "Virus Removal",
-      description: "Clean and secure your device from malware and viruses",
+      title: "Eliminación de Virus",
+      description: "Limpia y protege tu dispositivo contra malware y virus",
       iconName: "security", // Icono Material (o 'bug_report')
     },
     {
-      title: "Data Recovery",
-      description: "Retrieve your important files from damaged storage devices",
+      title: "Recuperación de Datos",
+      description: "Recupera tus archivos importantes desde dispositivos de almacenamiento dañados",
       iconName: "settings_backup_restore", // Icono Material
     },
     {
-      title: "Network Setup",
-      description: "Configure your home or office network for optimal performance",
+      title: "Configuración de Red",
+      description: "Optimiza la configuración de tu red doméstica o de oficina para un mejor rendimiento",
       iconName: "router", // Icono Material (o 'lan')
     },
     {
-      title: "Tech Consultation",
-      description: "Expert advice on the best solutions for your tech needs",
+      title: "Consultoría Tecnológica",
+      description: "Asesoramiento experto sobre las mejores soluciones para tus necesidades tecnológicas",
       iconName: "support_agent", // Icono Material (o 'help_outline')
     },
   ];
