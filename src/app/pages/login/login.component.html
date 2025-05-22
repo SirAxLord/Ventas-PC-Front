@@ -1,0 +1,41 @@
+<div class="auth-form-container">
+  <mat-card class="auth-card">
+    <mat-card-title class="form-title">Iniciar Sesión</mat-card-title>
+    <mat-card-content>
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Nombre de Usuario</mat-label>
+          <input matInput formControlName="username" placeholder="Tu nombre de usuario" required>
+          <mat-icon matSuffix>person</mat-icon>
+          <mat-error *ngIf="loginForm.get('username')?.touched && loginForm.get('username')?.hasError('required')">
+            El nombre de usuario es requerido.
+          </mat-error>
+          <mat-error *ngIf="loginForm.get('username')?.touched && loginForm.get('username')?.hasError('minlength')">
+            Debe tener al menos 3 caracteres.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Contraseña</mat-label>
+          <input matInput formControlName="password" [type]="hidePassword ? 'password' : 'text'" placeholder="Tu contraseña" required>
+          <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" type="button" [attr.aria-label]="hidePassword ? 'Mostrar contraseña' : 'Ocultar contraseña'" [attr.aria-pressed]="hidePassword">
+            <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+          <mat-error *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.hasError('required')">
+            La contraseña es requerida.
+          </mat-error>
+          <mat-error *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.hasError('minlength')">
+            Debe tener al menos 6 caracteres.
+          </mat-error>
+        </mat-form-field>
+
+        <button mat-flat-button color="primary" type="submit" class="full-width submit-button" [disabled]="loginForm.invalid">
+          Ingresar
+        </button>
+      </form>
+    </mat-card-content>
+    <mat-card-actions align="start" class="form-actions">
+      <p>¿No tienes una cuenta? <a routerLink="/register" class="auth-link">Regístrate aquí</a></p>
+    </mat-card-actions>
+  </mat-card>
+</div>

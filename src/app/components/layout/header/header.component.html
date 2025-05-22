@@ -15,10 +15,21 @@
   </div>
 
   <div class="toolbar-section actions-section hidden md:flex">
-    <button mat-icon-button aria-label="Carrito de compras" class="cart-button">
+    <button mat-icon-button aria-label="Carrito de compras" class="cart-button" routerLink="/cart">
       <mat-icon>shopping_cart</mat-icon>
     </button>
-    <button mat-flat-button color="accent" class="shop-now-button">Comprar</button>
+   
+    <button mat-stroked-button routerLink="/login" class="login-button mx-2">Iniciar Sesión</button>
+    <button mat-flat-button color="accent" routerLink="/register" class="register-button">Registrarse</button>
+
+    <button mat-button [matMenuTriggerFor]="userMenu">
+      <mat-icon>account_circle</mat-icon>
+      Mi Cuenta
+    </button>
+    <mat-menu #userMenu="matMenu">
+      <button mat-menu-item routerLink="/profile">Perfil</button>
+      <button mat-menu-item (click)="logout()">Cerrar Sesión</button>
+    </mat-menu>
   </div>
 
   <div class="toolbar-section mobile-menu-section md:hidden">
@@ -35,12 +46,24 @@
   <a mat-menu-item href="#about">Sobre Nosotros</a>
   <a mat-menu-item href="#contact">Contáctanos</a>
   <mat-divider></mat-divider>
-  <a mat-menu-item href="#">
+  <a mat-menu-item href="/cart">
     <mat-icon>shopping_cart</mat-icon>
     <span>Carrito de compras</span>
   </a>
-  <a mat-menu-item href="#">
-    <mat-icon>store</mat-icon>
-    <span>Comprar</span>
+  <a mat-menu-item routerLink="/login">
+    <mat-icon>login</mat-icon>
+    <span>Iniciar Sesión</span>
+  </a>
+  <a mat-menu-item routerLink="/register">
+    <mat-icon>person_add</mat-icon>
+    <span>Registrarse</span>
+  </a>
+  <a mat-menu-item routerLink="/profile">
+    <mat-icon>account_circle</mat-icon>
+    <span>Mi Cuenta</span>
+  </a>
+  <a mat-menu-item (click)="logout()">
+    <mat-icon>logout</mat-icon>
+    <span>Cerrar Sesión</span>
   </a>
 </mat-menu>

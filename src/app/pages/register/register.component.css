@@ -1,0 +1,51 @@
+.auth-form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 64px); /* Asume altura del header de 64px, ajusta si es necesario */
+  padding: 20px;
+  box-sizing: border-box; /* Para que el padding no aumente el tamaño total */
+  /* background-color: #f0f2f5; Opcional: un color de fondo suave */
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 400px; /* Ancho máximo de la tarjeta */
+}
+
+.form-title {
+  text-align: center;
+  margin-bottom: 24px; /* Más espacio después del título */
+  font-size: 1.5em; /* Título un poco más grande */
+}
+
+.full-width {
+  width: 100%;
+  margin-bottom: 16px; /* Espacio entre campos */
+}
+
+.submit-button {
+  margin-top: 16px; /* Espacio antes del botón de envío */
+  padding: 12px 0; /* Botón un poco más alto */
+  font-size: 1em;
+}
+
+.form-actions {
+  padding: 16px 0 0; /* Espacio arriba de los actions */
+  text-align: center;
+}
+
+.form-actions p {
+  margin: 0;
+  font-size: 0.9em;
+}
+
+.auth-link {
+  /* color: #1976d2;  Puedes usar el color primario de tu tema de Angular Material */
+  /* text-decoration: none; */ /* Ya lo maneja el tema de Material generalmente */
+  font-weight: 500;
+}
+
+/* .auth-link:hover {
+  text-decoration: underline;
+} */
