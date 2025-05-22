@@ -4,7 +4,7 @@ import { MatCardModule } from '@angular/material/card';     // Para <mat-card>
 import { MatButtonModule } from '@angular/material/button';   // Para el botón
 import { MatIconModule } from '@angular/material/icon';     // Para el icono del header
 // Si usaras Lucide: import { LucideAngularModule } from 'lucide-angular';
-import { Product } from '../products-section/products-section.component'; // Importa la interfaz
+import { Product } from '../../../services/product.service'; // 👈 MODIFICA ESTA LÍNEA (ajusta la ruta si es necesario)
 
 @Component({
   selector: 'app-product-card',
