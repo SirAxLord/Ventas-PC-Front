@@ -1,0 +1,58 @@
+<div class="cart-page-container">
+  <mat-card class="cart-card">
+    <mat-card-title class="cart-title">Tu Carrito de Compras</mat-card-title>
+    <mat-card-content>
+
+      <ng-container *ngIf="(cartItems$ | async) as items; else emptyCart">
+        <ng-container *ngIf="items.length > 0; else emptyCart">
+
+          <mat-list role="list">
+            <ng-container *ngFor="let item of items; trackBy: trackByProductId">
+              <mat-list-item role="listitem" class="cart-item">
+                <img matListItemAvatar [src]="item.product.image" [alt]="item.product.title" class="item-image">
+                <div matListItemTitle class="item-title">{{ item.product.title }}</div>
+                <div matListItemLine class="item-details">
+                  <span>Precio: {{ item.product.price | currency:'USD' }}</span>
+                  <span class="item-quantity">
+                    Cantidad:
+                    <mat-form-field appearance="outline" class="quantity-form-field">
+                      <input matInput type="number" [value]="item.quantity" min="0"
+                             (change)="updateQuantity(item, $event)"
+                             [attr.aria-label]="'Cantidad de ' + item.product.title">
+                    </mat-form-field>
+                  </span>
+                  <span>Subtotal: {{ (item.product.price * item.quantity) | currency:'USD' }}</span>
+                </div>
+                <button mat-icon-button color="warn" (click)="removeItem(item.product._id)" aria-label="Eliminar producto del carrito" class="remove-button">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </mat-list-item>
+              <mat-divider></mat-divider>
+            </ng-container>
+          </mat-list>
+
+          <div class="cart-summary">
+            <h3 class="summary-title">Resumen del Pedido</h3>
+            <p>Total de Artículos: <span class="summary-value">{{ itemCount$ | async }}</span></p>
+            <p class="total-price">Precio Total: <strong class="summary-value">{{ totalPrice$ | async | currency:'USD' }}</strong></p>
+            <mat-divider class="summary-divider"></mat-divider>
+            <div class="cart-actions">
+              <button mat-stroked-button color="warn" (click)="clearCart()" class="action-button">Vaciar Carrito</button>
+              <button mat-raised-button color="primary" (click)="proceedToCheckout()" class="action-button checkout-button">Proceder al Pago</button>
+            </div>
+          </div>
+
+        </ng-container>
+      </ng-container>
+
+      <ng-template #emptyCart>
+        <div class="empty-cart-message">
+          <mat-icon class="empty-cart-icon">remove_shopping_cart</mat-icon>
+          <p>Tu carrito está vacío.</p>
+          <a mat-stroked-button color="primary" routerLink="/">Continuar Comprando</a>
+        </div>
+      </ng-template>
+
+    </mat-card-content>
+  </mat-card>
+</div>

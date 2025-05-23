@@ -1,38 +1,104 @@
-.form-container {
+/* Para register.component.css */
+
+.auth-form-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: calc(100vh - 64px); /* Ajusta 64px si tu header tiene otra altura */
+  min-height: calc(100vh - 64px); 
   padding: 20px;
-  background-color: #f5f5f5; /* Un fondo suave */
+  box-sizing: border-box;
+  background-color: #0A2A54; 
 }
 
-mat-card {
+.auth-card { 
   width: 100%;
-  max-width: 400px;
+  max-width: 420px;
+  background-color: #FFFFFF; 
+  padding: 20px;
+  box-sizing: border-box;
 }
 
 .form-title {
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
+  font-size: 1.8em;
+  font-weight: 600;
+  color: #0A2A54; 
 }
 
 .full-width {
   width: 100%;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
+}
+
+:host ::ng-deep .auth-card .mat-mdc-form-field .mdc-floating-label,
+:host ::ng-deep .auth-card .mat-mdc-form-field .mat-mdc-label {
+  color: rgba(0, 0, 0, 0.6) !important;
+}
+
+:host ::ng-deep .auth-card .mat-mdc-input-element {
+  color: rgba(0, 0, 0, 0.87) !important;
+}
+
+:host ::ng-deep .auth-card .mat-mdc-form-field .mdc-line-ripple::before {
+  border-bottom-color: rgba(0, 0, 0, 0.42) !important;
+}
+
+:host ::ng-deep .auth-card .mat-mdc-form-field.mat-focused .mdc-line-ripple::after {
+  border-bottom-color: black !important;
+}
+
+:host ::ng-deep .auth-card .mat-mdc-form-field.mat-focused .mdc-floating-label,
+:host ::ng-deep .auth-card .mat-mdc-form-field.mat-focused .mat-mdc-label {
+  color: black !important;
+}
+
+.auth-card mat-icon[matSuffix] {
+  color: #757575;
+}
+
+:host ::ng-deep .auth-card .mat-mdc-form-field .mat-mdc-form-field-error {
+  color: #f44336 !important;
 }
 
 .submit-button {
-  margin-top: 10px;
-  padding: 10px 0;
+  margin-top: 24px;
+  padding: 12px 0;
+  font-size: 1.1em;
+  font-weight: 500;
+  background-color: #10B981; 
+  border-radius: 6px;
 }
+
+.submit-button:hover:not([disabled]) {
+  background-color: #0D946F;
+}
+
+.submit-button[disabled] {
+  background-color: rgba(0, 0, 0, 0.12);
+  color: rgba(0, 0, 0, 0.26);
+}
+
 .form-actions {
-    padding-top: 16px;
+  padding: 20px 0 0;
+  text-align: center;
+  border-top: 1px solid #e0e0e0;
+  margin-top: 24px;
 }
-.form-actions a {
-    color: var(--mat-primary-500-contrast-text); /* O el color de tu tema primario */
-    text-decoration: none;
+
+.form-actions p {
+  margin: 0;
+  font-size: 0.95em;
+  color: #374151;
 }
-.form-actions a:hover {
-    text-decoration: underline;
+
+.auth-link { 
+  color: #4F46E5; 
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.auth-link:hover {
+  text-decoration: underline;
+  color: #3D37B8;
 }

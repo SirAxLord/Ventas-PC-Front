@@ -1,26 +1,45 @@
-import { Component, Input } from '@angular/core'; // Importa Input
+// En src/app/components/product-card/product-card.component.ts
+
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatCardModule } from '@angular/material/card';     // Para <mat-card>
-import { MatButtonModule } from '@angular/material/button';   // Para el botón
-import { MatIconModule } from '@angular/material/icon';     // Para el icono del header
-// Si usaras Lucide: import { LucideAngularModule } from 'lucide-angular';
-import { Product } from '../../../services/product.service'; // 👈 MODIFICA ESTA LÍNEA (ajusta la ruta si es necesario)
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { Product } from '../../../services/product.service';
+import { CartService } from '../../../services/cart.service';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar'; 
 
 @Component({
   selector: 'app-product-card',
   standalone: true,
   imports: [
     CommonModule,
-    MatCardModule,    // <-- Importa módulos Material necesarios aquí
+    MatCardModule,
     MatButtonModule,
-    MatIconModule
-    // Si usaras Lucide: LucideAngularModule
+    MatIconModule,
+    MatSnackBarModule 
   ],
   templateUrl: './product-card.component.html',
   styleUrls: ['./product-card.component.css']
 })
 export class ProductCardComponent {
-  // Define una propiedad de entrada 'product' que recibirá datos del padre
-  // Usa el signo '!' para indicar que será inicializado por el padre (Input binding)
   @Input() product!: Product;
+
+  constructor(
+    private cartService: CartService,
+    private snackBar: MatSnackBar 
+  ) {}
+
+  addToCart(): void {
+    if (this.product) {
+      this.cartService.addItem(this.product);
+      
+      // Mostrar el Snackbar
+      this.snackBar.open(`${this.product.title} añadido al carrito`, 'Cerrar', {
+        duration: 3000, // Duración del msj
+        horizontalPosition: 'center',
+        verticalPosition: 'bottom',   
+      });
+    }
+  }
 }

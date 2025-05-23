@@ -1,0 +1,165 @@
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: calc(100vh - 64px);
+  padding: 20px;
+  box-sizing: border-box;
+  background-color: #0A2A54;
+}
+
+mat-card {
+  width: 100%;
+  max-width: 600px;
+  background-color: #FFFFFF;
+  border-radius: 8px;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+mat-card-header mat-card-title {
+  text-align: center;
+  width: 100%;
+  margin-bottom: 24px;
+  font-size: 1.8em;
+  font-weight: 600;
+  color: #0A2A54;
+  padding-top: 0;
+}
+
+.full-width {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+:host ::ng-deep mat-card .mat-mdc-form-field .mdc-floating-label,
+:host ::ng-deep mat-card .mat-mdc-form-field .mat-mdc-label {
+  color: rgba(0, 0, 0, 0.6) !important;
+}
+
+:host ::ng-deep mat-card .mat-mdc-input-element {
+  color: rgba(0, 0, 0, 0.87) !important;
+}
+
+:host ::ng-deep mat-card .mat-mdc-form-field .mdc-line-ripple::before {
+  border-bottom-color: rgba(0, 0, 0, 0.42) !important;
+}
+
+:host ::ng-deep mat-card .mat-mdc-form-field.mat-focused .mdc-line-ripple::after {
+  border-bottom-color: black !important;
+}
+
+:host ::ng-deep mat-card .mat-mdc-form-field.mat-focused .mdc-floating-label,
+:host ::ng-deep mat-card .mat-mdc-form-field.mat-focused .mat-mdc-label {
+  color: black !important;
+}
+
+:host ::ng-deep mat-card .mat-mdc-form-field .mat-mdc-form-field-error {
+  color: #f44336 !important;
+}
+
+mat-card-actions {
+  padding: 16px 0 0;
+  margin-top: 10px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+mat-card-actions button[mat-raised-button] {
+  min-width: 150px;
+  padding: 10px 0;
+  font-size: 1.1em;
+  font-weight: 500;
+  background-color: #10B981;
+  color: #FFFFFF;
+  border-radius: 6px;
+}
+
+mat-card-actions button[mat-raised-button]:hover:not([disabled]) {
+  background-color: #0D946F;
+}
+
+mat-card-actions button[mat-raised-button][disabled] {
+  background-color: rgba(0, 0, 0, 0.12);
+  color: rgba(0, 0, 0, 0.26);
+}
+
+mat-card-actions button[mat-stroked-button] {
+  min-width: 120px;
+  padding: 10px 0;
+  font-size: 1.1em;
+  font-weight: 500;
+  color: #545454;
+  border-color: rgba(0, 0, 0, 0.23);
+  border-radius: 6px;
+}
+mat-card-actions button[mat-stroked-button]:hover:not([disabled]) {
+  background-color: rgba(0, 0, 0, 0.04);
+}
+
+.success-message {
+  color: #155724;
+  background-color: #D4EDDA;
+  border: 1px solid #C3E6CB;
+  padding: 12px 15px;
+  margin-top: 15px;
+  margin-bottom: 0;
+  border-radius: 6px;
+  text-align: center;
+  font-weight: 500;
+}
+
+.error-message {
+  color: #721C24;
+  background-color: #F8D7DA;
+  border: 1px solid #F5C6CB;
+  padding: 12px 15px;
+  margin-top: 15px;
+  margin-bottom: 0;
+  border-radius: 6px;
+  text-align: center;
+  font-weight: 500;
+}
+
+.mr-2 {
+  margin-right: 8px;
+}
+
+.loading-spinner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  text-align: center;
+  color: #e0e0e0;
+}
+
+.loading-spinner p {
+  margin-top: 10px;
+  font-size: 1.1em;
+}
+
+.error-message-container {
+  width: 100%;
+  max-width: 600px;
+  text-align: center;
+  padding: 20px;
+  background-color: #FFFFFF;
+  border-radius: 8px;
+  color: #721C24;
+}
+
+.error-message-container mat-card-title {
+    color: #0A2A54;
+}
+
+.error-message-container p {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.error-card mat-card-content p {
+  margin-bottom: 20px;
+}

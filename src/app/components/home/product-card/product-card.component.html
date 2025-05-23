@@ -13,6 +13,6 @@
 
     <mat-card-actions class="product-card-footer">
       <span class="product-price">{{ product.price | currency:'USD':'symbol':'1.2-2' }}</span>
-      <button mat-flat-button color="accent" class="add-to-cart-button">Añadir al carrito</button>
+      <button mat-flat-button color="accent" class="add-to-cart-button" (click)="addToCart()">Añadir al carrito</button>
     </mat-card-actions>
 </mat-card>

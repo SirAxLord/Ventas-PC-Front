@@ -1,0 +1,78 @@
+<div class="form-container">
+  <div *ngIf="isLoading" class="loading-spinner">
+    <mat-spinner diameter="50"></mat-spinner>
+    <p>Cargando datos del producto...</p>
+  </div>
+
+  <div *ngIf="!isLoading && errorMessage && !product" class="error-message-container">
+    <mat-card class="error-card">
+      <mat-card-title>Error</mat-card-title>
+      <mat-card-content>
+        <p>{{ errorMessage }}</p>
+        <button mat-stroked-button color="warn" (click)="productId && loadProductData(productId)">Reintentar</button>
+        </mat-card-content>
+    </mat-card>
+  </div>
+
+  <mat-card *ngIf="!isLoading && product">
+    <mat-card-header>
+      <mat-card-title>Editar Producto</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form (ngSubmit)="onSubmit()" #productForm="ngForm">
+        
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Título</mat-label>
+          <input matInput type="text" id="title" required [(ngModel)]="product.title" name="title" #title="ngModel">
+          <mat-error *ngIf="title.invalid && (title.dirty || title.touched)">
+            El título es requerido.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Descripción</mat-label>
+          <textarea matInput id="description" required [(ngModel)]="product.description" name="description" #description="ngModel" cdkTextareaAutosize cdkAutosizeMinRows="3"></textarea>
+          <mat-error *ngIf="description.invalid && (description.dirty || description.touched)">
+            La descripción es requerida.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Precio</mat-label>
+          <input matInput type="number" id="price" required [(ngModel)]="product.price" name="price" #price="ngModel" min="0">
+          <mat-error *ngIf="price.invalid && (price.dirty || price.touched)">
+            El precio es requerido y debe ser un número positivo.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Nombre del Ícono (ej. icon.svg)</mat-label>
+          <input matInput type="text" id="iconName" required [(ngModel)]="product.iconName" name="iconName" #iconName="ngModel">
+          <mat-error *ngIf="iconName.invalid && (iconName.dirty || iconName.touched)">
+            El nombre del ícono es requerido.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>URL de la Imagen (ej. images/imagen.jpg)</mat-label>
+          <input matInput type="text" id="image" required [(ngModel)]="product.image" name="image" #image="ngModel">
+          <mat-error *ngIf="image.invalid && (image.dirty || image.touched)">
+            La URL de la imagen es requerida.
+          </mat-error>
+        </mat-form-field>
+
+        <div *ngIf="successMessage" class="success-message form-message">
+          {{ successMessage }}
+        </div>
+        <div *ngIf="errorMessage && product" class="error-message form-message"> {{ errorMessage }}
+        </div>
+
+      </form>
+    </mat-card-content>
+    <mat-card-actions align="end">
+      <button mat-stroked-button routerLink="/ruta-a-tu-lista-de-productos" class="mr-2">Cancelar</button> <button mat-raised-button color="primary" type="submit" [disabled]="productForm.invalid || isLoading" (click)="productForm.ngSubmit.emit()">
+        {{ isLoading ? 'Guardando...' : 'Guardar Cambios' }}
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>

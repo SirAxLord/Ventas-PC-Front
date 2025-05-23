@@ -2,50 +2,113 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: calc(100vh - 64px); /* Asume altura del header de 64px, ajusta si es necesario */
+  min-height: calc(100vh - 64px);
   padding: 20px;
-  box-sizing: border-box; /* Para que el padding no aumente el tamaño total */
-  /* background-color: #f0f2f5; Opcional: un color de fondo suave */
+  box-sizing: border-box;
+  background-color: #0A2A54;
 }
 
 .auth-card {
   width: 100%;
-  max-width: 400px; /* Ancho máximo de la tarjeta */
+  max-width: 420px;
+  background-color: #FFFFFF;
+  border-radius: 8px;
+  /* Considera añadir padding aquí si los campos están muy pegados a los bordes de la tarjeta */
+  /* padding: 20px; */
 }
 
 .form-title {
   text-align: center;
-  margin-bottom: 24px; /* Más espacio después del título */
-  font-size: 1.5em; /* Título un poco más grande */
+  margin-bottom: 24px; /* Asegúrate que haya suficiente padding en mat-card-title o aquí */
+  font-size: 1.8em;
+  font-weight: 600;
+  color: #0A2A54;
+  /* Si .form-title está en mat-card-title, el padding de mat-card-title afecta */
+  /* padding-top: 16px; */ /* Ejemplo si el título está muy arriba */
 }
 
 .full-width {
   width: 100%;
-  margin-bottom: 16px; /* Espacio entre campos */
+  margin-bottom: 20px;
+}
+
+/* Texto de la etiqueta (label) en estado normal (no enfocado) */
+:host ::ng-deep .auth-card .mat-mdc-form-field .mdc-floating-label,
+:host ::ng-deep .auth-card .mat-mdc-form-field .mat-mdc-label {
+  color: rgba(0, 0, 0, 0.6) !important;
+}
+
+/* Texto que el usuario escribe en el input */
+:host ::ng-deep .auth-card .mat-mdc-input-element {
+  color: rgba(0, 0, 0, 0.87) !important;
+}
+
+/* Borde inferior del campo en estado normal */
+:host ::ng-deep .auth-card .mat-mdc-form-field .mdc-line-ripple::before {
+  border-bottom-color: rgba(0, 0, 0, 0.42) !important;
+}
+
+/* --- NUEVOS ESTILOS: Color de foco en NEGRO --- */
+/* Borde inferior del campo cuando está enfocado */
+:host ::ng-deep .auth-card .mat-mdc-form-field.mat-focused .mdc-line-ripple::after {
+  border-bottom-color: black !important;
+}
+
+/* Etiqueta (label) cuando el campo está enfocado */
+:host ::ng-deep .auth-card .mat-mdc-form-field.mat-focused .mdc-floating-label,
+:host ::ng-deep .auth-card .mat-mdc-form-field.mat-focused .mat-mdc-label {
+  color: black !important;
+}
+/* --- FIN DE NUEVOS ESTILOS PARA FOCO --- */
+
+.auth-card mat-icon[matSuffix] {
+  color: #757575; /* Puedes probar un gris más oscuro como #616161 si este es muy claro */
+}
+
+/* Color de los mensajes de error (Material ya lo pone en rojo) */
+:host ::ng-deep .auth-card .mat-mdc-form-field .mat-mdc-form-field-error {
+  color: #f44336 !important;
 }
 
 .submit-button {
-  margin-top: 16px; /* Espacio antes del botón de envío */
-  padding: 12px 0; /* Botón un poco más alto */
-  font-size: 1em;
+  margin-top: 24px;
+  padding: 12px 0;
+  font-size: 1.1em;
+  font-weight: 500;
+  background-color: #10B981;
+  color: #FFFFFF;
+  border-radius: 6px;
+}
+
+.submit-button:hover:not([disabled]) {
+  background-color: #0D946F;
+}
+
+.submit-button[disabled] {
+  background-color: rgba(0, 0, 0, 0.12);
+  color: rgba(0, 0, 0, 0.26);
 }
 
 .form-actions {
-  padding: 16px 0 0; /* Espacio arriba de los actions */
+  padding: 20px 0 0;
   text-align: center;
+  border-top: 1px solid #e0e0e0;
+  margin-top: 24px;
 }
 
 .form-actions p {
   margin: 0;
-  font-size: 0.9em;
+  font-size: 0.95em;
+  color: #374151;
 }
 
 .auth-link {
-  /* color: #1976d2;  Puedes usar el color primario de tu tema de Angular Material */
-  /* text-decoration: none; */ /* Ya lo maneja el tema de Material generalmente */
-  font-weight: 500;
+  color: #4F46E5;
+  text-decoration: none;
+  font-weight: 600;
 }
 
-/* .auth-link:hover {
+.auth-link:hover {
   text-decoration: underline;
-} */
+  color: #3D37B8;
+}
