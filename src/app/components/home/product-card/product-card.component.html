@@ -1,18 +1,18 @@
-<mat-card class="product-card-container">
-    <mat-card-header class="product-card-header">
-      <div mat-card-avatar class="header-icon-container">
-          <mat-icon class="header-icon">{{ product.iconName }}</mat-icon>
-      </div>
-      <mat-card-title>{{ product.title }}</mat-card-title>
-    </mat-card-header>
+<mat-card class="product-card-container" (click)="viewDetails()" style="cursor: pointer;">
+  <mat-card-header class="product-card-header">
+    <div mat-card-avatar class="header-icon-container">
+      <mat-icon class="header-icon">{{ product.iconName }}</mat-icon>
+    </div>
+    <mat-card-title>{{ product.title }}</mat-card-title>
+  </mat-card-header>
 
-    <mat-card-content class="product-card-content">
-        <img mat-card-image [src]="product.image" [alt]="product.title" class="product-image">
-        <p class="product-description">{{ product.description }}</p>
-    </mat-card-content>
+  <mat-card-content class="product-card-content">
+    <img mat-card-image [src]="product.image" [alt]="product.title" class="product-image">
+  
+  </mat-card-content>
 
-    <mat-card-actions class="product-card-footer">
-      <span class="product-price">{{ product.price | currency:'USD':'symbol':'1.2-2' }}</span>
-      <button mat-flat-button color="accent" class="add-to-cart-button" (click)="addToCart()">Añadir al carrito</button>
-    </mat-card-actions>
+  <mat-card-actions class="product-card-footer">
+    <span class="product-price">{{ product.price | currency:'USD':'symbol':'1.2-2' }}</span>
+    <button mat-flat-button color="accent" class="add-to-cart-button" (click)="addToCart($event)">Añadir al carrito</button>
+  </mat-card-actions>
 </mat-card>

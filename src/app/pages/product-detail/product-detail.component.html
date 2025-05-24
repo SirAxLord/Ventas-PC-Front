@@ -1,0 +1,54 @@
+<div class="product-detail-page-container">
+
+  <div *ngIf="isLoading" class="loading-container">
+    <mat-spinner diameter="60"></mat-spinner>
+    <p>Cargando detalles del producto...</p>
+  </div>
+
+  <div *ngIf="!isLoading && errorMessage" class="error-container">
+    <mat-card class="error-display-card">
+      <mat-card-title>Error</mat-card-title>
+      <mat-card-content>
+        <p>{{ errorMessage }}</p>
+      </mat-card-content>
+      <mat-card-actions align="end">
+        <button mat-stroked-button (click)="goBack()">Volver</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+
+  <mat-card *ngIf="!isLoading && product" class="product-detail-card">
+    <mat-card-header class="product-detail-header">
+      <mat-card-title class="product-title">{{ product.title }}</mat-card-title>
+      </mat-card-header>
+
+    <div class="product-content-wrapper">
+      <div class="product-image-container">
+        <img mat-card-image [src]="product.image" [alt]="product.title" class="product-image-detail">
+      </div>
+
+      <div class="product-info-container">
+        <mat-card-content class="product-description-section">
+          <h3>Descripción</h3>
+          <p>{{ product.description }}</p>
+        </mat-card-content>
+
+        <div class="product-price-section">
+          <span class="price-label">Precio:</span>
+          <span class="price-value">{{ product.price | currency:'USD':'symbol':'1.2-2' }}</span>
+        </div>
+
+        <mat-card-actions class="product-actions-section" align="end">
+          <button mat-stroked-button (click)="goBack()" class="action-button back-button">
+            <mat-icon>arrow_back</mat-icon>
+            Volver
+          </button>
+          <button mat-raised-button color="primary" (click)="addToCart()" class="action-button add-to-cart-button">
+            <mat-icon>add_shopping_cart</mat-icon>
+            Añadir al carrito
+          </button>
+        </mat-card-actions>
+      </div>
+    </div>
+  </mat-card>
+</div>

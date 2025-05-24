@@ -5,6 +5,7 @@ import { RegisterComponent } from './pages/register/register.component';
 import { CrearProductoComponent } from './components/crear-producto/crear-producto.component';
 import { EditarProductoComponent } from './components/editar-producto/editar-producto.component';
 import { CartComponent } from './pages/cart/cart.component';
+import { ProductDetailComponent } from './pages/product-detail/product-detail.component';
 
 export const routes: Routes = [
   {
@@ -31,6 +32,10 @@ export const routes: Routes = [
   {
     path: 'carrito', 
     component: CartComponent
+  },
+  {
+    path: 'producto/:id', 
+    component: ProductDetailComponent
   },
   
 
