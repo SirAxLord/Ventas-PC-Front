@@ -6,7 +6,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { RouterLink } from '@angular/router'; // Para el enlace a "Registrarse"
+import { Router, RouterLink } from '@angular/router'; // 👈 Importa Router
+import { AuthService, AuthResponse } from '../../services/auth.service'; // 👈 Importa AuthService y AuthResponse
 
 @Component({
   selector: 'app-login',
@@ -26,9 +27,14 @@ import { RouterLink } from '@angular/router'; // Para el enlace a "Registrarse"
 })
 export class LoginComponent {
   loginForm: FormGroup;
-  hidePassword = true; // Para el botón de mostrar/ocultar contraseña
+  hidePassword = true;
+  loginError: string | null = null; // Para mostrar mensajes de error
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService, // 👈 Inyecta AuthService
+    private router: Router            // 👈 Inyecta Router
+  ) {
     this.loginForm = this.fb.group({
       username: ['', [Validators.required, Validators.minLength(3)]],
       password: ['', [Validators.required, Validators.minLength(6)]]
@@ -36,16 +42,30 @@ export class LoginComponent {
   }
 
   onSubmit() {
+    this.loginError = null; // Resetea el error en cada intento
     if (this.loginForm.valid) {
-      console.log('Datos del formulario de Login:', this.loginForm.value);
-      // Aquí es donde, en el futuro, llamarías a:
-      // this.authService.login(this.loginForm.value).subscribe(
-      //   response => { /* Manejar respuesta exitosa, guardar token, redirigir */ },
-      //   error => { /* Manejar error de login */ }
-      // );
+      this.authService.login(this.loginForm.value).subscribe(
+        (response: AuthResponse) => { // El token ya se guarda en el servicio gracias al .pipe(tap())
+          console.log('Login exitoso:', response);
+          // El servicio AuthService.login ya guarda el token y el método loginSuccess (si lo tenías así antes)
+          // o la lógica dentro del pipe(tap()) se encarga.
+          // Navegamos al inicio
+          this.router.navigate(['/']); // O a la ruta que desees después del login
+        },
+        (error) => {
+          console.error('Error en el login:', error);
+          if (error.status === 400 || error.status === 401) {
+            this.loginError = 'Nombre de usuario o contraseña incorrectos.';
+          } else {
+            this.loginError = 'Error al intentar iniciar sesión. Por favor, inténtalo de nuevo.';
+          }
+          // Opcional: Podrías leer error.error.msg si tu backend lo envía consistentemente
+          // this.loginError = error.error?.msg || 'Error desconocido.';
+        }
+      );
     } else {
       console.log('Formulario de Login no válido');
-      // Marcar todos los campos como 'touched' para mostrar errores de validación si no lo hacen ya
+      this.loginError = 'Por favor, completa todos los campos correctamente.';
       this.loginForm.markAllAsTouched();
     }
   }
