@@ -102,3 +102,14 @@
   text-decoration: underline;
   color: #3D37B8;
 }
+
+.form-server-success {
+  color: green; /* O el color de éxito de tu tema */
+  background-color: #e8f5e9; /* Un fondo verde claro */
+  border: 1px solid green; /* O el color de éxito de tu tema */
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 4px;
+  text-align: center;
+  font-size: 0.9em;
+}

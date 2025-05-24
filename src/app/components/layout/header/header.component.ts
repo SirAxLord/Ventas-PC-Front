@@ -5,7 +5,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatDividerModule } from '@angular/material/divider';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router'; // Importa Router
+import { AuthService } from '../../../services/auth.service'; 
 
 @Component({
   selector: 'app-header',
@@ -17,20 +18,35 @@ import { RouterLink } from '@angular/router';
     MatIconModule,
     MatMenuModule,
     MatDividerModule,
-    RouterLink 
+    RouterLink
   ],
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
-  isLoggedIn = false; // Cambia esto a true para probar la vista de "Mi Cuenta"
 
-  constructor() { } // Puedes inyectar AuthService y Router aquí más adelante
+  // Ya no usamos una variable local 'isLoggedIn', usamos el servicio
+  // isLoggedIn = false;
+
+  // Inyecta AuthService y Router
+  constructor(public authService: AuthService, private router: Router) { }
+
+  get isLoggedIn(): boolean {
+    return this.authService.isLoggedIn();
+  }
+
+  get isAdmin(): boolean {
+    return this.authService.isAdmin();
+  }
+
+  get username(): string | null {
+    return this.authService.getUsername();
+  }
 
   logout(): void {
     console.log('Cerrar Sesión clickeado');
-    // Aquí, en el futuro, llamarías a this.authService.logout()
-    // y probablemente redirigirías: this.router.navigate(['/login']);
-    this.isLoggedIn = false; // Para simular el cambio de estado visualmente
+    this.authService.logout();
+    // La navegación ya la hace el authService.logout()
+    // this.router.navigate(['/login']);
   }
 }

@@ -1,4 +1,4 @@
-<div class="auth-form-container">
+<div class="auth-page-container">
   <mat-card class="auth-card">
     <mat-card-title class="form-title">Iniciar Sesión</mat-card-title>
     <mat-card-content>
@@ -29,12 +29,17 @@
           </mat-error>
         </mat-form-field>
 
+        <div *ngIf="loginError" class="form-server-error">
+          {{ loginError }}
+        </div>
+
         <button mat-flat-button color="primary" type="submit" class="full-width submit-button" [disabled]="loginForm.invalid">
           Ingresar
         </button>
       </form>
     </mat-card-content>
-    <mat-card-actions align="start" class="form-actions">
+    <!-- Cambiado a align="center" si prefieres -->
+    <mat-card-actions align="end" class="form-actions">
       <p>¿No tienes una cuenta? <a routerLink="/register" class="auth-link">Regístrate aquí</a></p>
     </mat-card-actions>
   </mat-card>

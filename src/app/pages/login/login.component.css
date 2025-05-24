@@ -112,3 +112,15 @@
   text-decoration: underline;
   color: #3D37B8;
 }
+
+/* En login.component.css o un archivo global de estilos */
+.form-server-error {
+  color: red; /* O el color de error de tu tema, ej. var(--mat-warn-500-contrast-text) */
+  background-color: #ffebee; /* Un fondo rojo claro */
+  border: 1px solid red; /* O el color de error de tu tema */
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 4px;
+  text-align: center;
+  font-size: 0.9em;
+}
