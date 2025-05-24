@@ -1,0 +1,123 @@
+.form-page-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: calc(100vh - 64px);
+  padding: 20px;
+  box-sizing: border-box;
+  background-color: #0A2A54;
+}
+
+.loading-form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  color: #e0e0e0; 
+  text-align: center;
+  width: 100%;
+}
+.loading-form-container p {
+  margin-top: 15px;
+  font-size: 1.2em;
+}
+
+
+.form-card {
+  width: 100%;
+  max-width: 700px;
+  background-color: #FFFFFF;
+  border-radius: 8px;
+  padding: 24px;
+  box-sizing: border-box;
+}
+
+.form-main-title {
+  text-align: center;
+  margin-bottom: 28px;
+  font-size: 1.8em;
+  font-weight: 600;
+  color: #0A2A54;
+}
+
+.full-width-form-field {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+:host ::ng-deep .form-card .mat-mdc-form-field .mdc-floating-label,
+:host ::ng-deep .form-card .mat-mdc-form-field .mat-mdc-label {
+  color: rgba(0, 0, 0, 0.6) !important;
+}
+
+:host ::ng-deep .form-card .mat-mdc-input-element {
+  color: rgba(0, 0, 0, 0.87) !important;
+}
+:host ::ng-deep .form-card textarea.mat-mdc-input-element {
+  color: rgba(0, 0, 0, 0.87) !important;
+}
+
+:host ::ng-deep .form-card .mat-mdc-form-field .mdc-line-ripple::before {
+  border-bottom-color: rgba(0, 0, 0, 0.42) !important;
+}
+
+:host ::ng-deep .form-card .mat-mdc-form-field.mat-focused .mdc-line-ripple::after {
+  border-bottom-color: black !important;
+}
+
+:host ::ng-deep .form-card .mat-mdc-form-field.mat-focused .mdc-floating-label,
+:host ::ng-deep .form-card .mat-mdc-form-field.mat-focused .mat-mdc-label {
+  color: black !important;
+}
+
+:host ::ng-deep .form-card .mat-mdc-form-field .mat-mdc-form-field-error {
+  color: #f44336 !important;
+}
+
+.form-card mat-icon[matSuffix] {
+  color: #757575;
+}
+
+.form-submit-actions {
+  margin-top: 24px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.submit-form-button {
+  min-width: 150px;
+  padding: 10px 0;
+  font-size: 1em;
+  font-weight: 500;
+  background-color: #10B981;
+  color: #FFFFFF;
+  border-radius: 6px;
+}
+.submit-form-button:hover:not([disabled]) {
+  background-color: #0D946F;
+}
+.submit-form-button[disabled] {
+  background-color: rgba(0, 0, 0, 0.12);
+  color: rgba(0, 0, 0, 0.26);
+}
+
+.cancel-button {
+  min-width: 120px;
+  padding: 10px 0;
+  font-size: 1em;
+  font-weight: 500;
+  color: #545454;
+  border-color: rgba(0, 0, 0, 0.23);
+  border-radius: 6px;
+}
+.cancel-button:hover:not([disabled]) {
+  background-color: rgba(0, 0, 0, 0.04);
+}
+
+.button-spinner {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 8px;
+}

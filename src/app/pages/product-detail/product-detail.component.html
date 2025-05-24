@@ -7,11 +7,17 @@
 
   <div *ngIf="!isLoading && errorMessage" class="error-container">
     <mat-card class="error-display-card">
-      <mat-card-title>Error</mat-card-title>
+      <mat-card-title>{{ isAuthError ? 'Acceso Requerido' : 'Error' }}</mat-card-title>
       <mat-card-content>
         <p>{{ errorMessage }}</p>
       </mat-card-content>
-      <mat-card-actions align="end">
+      
+      <mat-card-actions align="end" *ngIf="isAuthError">
+        <button mat-stroked-button color="primary" routerLink="/login" class="auth-action-button">Iniciar Sesión</button>
+        <button mat-flat-button color="accent" routerLink="/register" class="auth-action-button register-button-style">Registrarse</button>
+      </mat-card-actions>
+
+      <mat-card-actions align="end" *ngIf="!isAuthError">
         <button mat-stroked-button (click)="goBack()">Volver</button>
       </mat-card-actions>
     </mat-card>
@@ -20,7 +26,7 @@
   <mat-card *ngIf="!isLoading && product" class="product-detail-card">
     <mat-card-header class="product-detail-header">
       <mat-card-title class="product-title">{{ product.title }}</mat-card-title>
-      </mat-card-header>
+    </mat-card-header>
 
     <div class="product-content-wrapper">
       <div class="product-image-container">

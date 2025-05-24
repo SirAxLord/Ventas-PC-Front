@@ -5,7 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatDividerModule } from '@angular/material/divider';
-import { Router, RouterLink } from '@angular/router'; // Importa Router
+import { Router, RouterLink } from '@angular/router'; 
 import { AuthService } from '../../../services/auth.service'; 
 
 @Component({
@@ -25,10 +25,7 @@ import { AuthService } from '../../../services/auth.service';
 })
 export class HeaderComponent {
 
-  // Ya no usamos una variable local 'isLoggedIn', usamos el servicio
-  // isLoggedIn = false;
-
-  // Inyecta AuthService y Router
+ 
   constructor(public authService: AuthService, private router: Router) { }
 
   get isLoggedIn(): boolean {
@@ -46,7 +43,6 @@ export class HeaderComponent {
   logout(): void {
     console.log('Cerrar Sesión clickeado');
     this.authService.logout();
-    // La navegación ya la hace el authService.logout()
-    // this.router.navigate(['/login']);
+   
   }
 }

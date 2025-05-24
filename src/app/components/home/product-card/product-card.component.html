@@ -8,11 +8,39 @@
 
   <mat-card-content class="product-card-content">
     <img mat-card-image [src]="product.image" [alt]="product.title" class="product-image">
-  
+    <p class="product-description">{{ product.description }}</p>
   </mat-card-content>
 
   <mat-card-actions class="product-card-footer">
     <span class="product-price">{{ product.price | currency:'USD':'symbol':'1.2-2' }}</span>
-    <button mat-flat-button color="accent" class="add-to-cart-button" (click)="addToCart($event)">Añadir al carrito</button>
+    <div class="action-buttons-wrapper">
+      <button 
+        *ngIf="authService.isLoggedIn() && authService.isAdmin()" 
+        mat-stroked-button 
+        color="primary" 
+        class="edit-button"
+        [routerLink]="['/admin/productos/editar', product._id]"
+        (click)="$event.stopPropagation()">
+        <mat-icon>edit</mat-icon> Editar
+      </button>
+      
+      <button 
+        *ngIf="authService.isLoggedIn() && authService.isAdmin()" 
+        mat-icon-button 
+        color="warn" 
+        class="delete-button"
+        (click)="openDeleteConfirmDialog($event)"
+        aria-label="Eliminar producto">
+        <mat-icon>delete</mat-icon>
+      </button>
+      
+      <button 
+        mat-flat-button 
+        color="accent" 
+        class="add-to-cart-button" 
+        (click)="addToCart($event)">
+        Añadir al carrito
+      </button>
+    </div>
   </mat-card-actions>
 </mat-card>

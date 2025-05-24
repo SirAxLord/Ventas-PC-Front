@@ -6,6 +6,9 @@ import { CrearProductoComponent } from './components/crear-producto/crear-produc
 import { EditarProductoComponent } from './components/editar-producto/editar-producto.component';
 import { CartComponent } from './pages/cart/cart.component';
 import { ProductDetailComponent } from './pages/product-detail/product-detail.component';
+import { ServiceDetailComponent } from './pages/service-detail/service-detail.component';
+import { CreateServiceComponent } from './pages/create-service/create-service.component';
+import { EditServiceComponent } from './pages/edit-service/edit-service.component';
 
 export const routes: Routes = [
   {
@@ -37,7 +40,18 @@ export const routes: Routes = [
     path: 'producto/:id', 
     component: ProductDetailComponent
   },
-  
+  {
+    path: 'servicio/:id', 
+    component: ServiceDetailComponent
+  },
+  {
+    path: 'admin/servicios/crear',
+    component: CreateServiceComponent
+  },
+{
+    path: 'admin/servicios/editar/:id', 
+    component: EditServiceComponent
+  },
 
   {
     path: '**', 

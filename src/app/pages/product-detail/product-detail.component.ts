@@ -1,3 +1,6 @@
+
+import { HttpErrorResponse } from '@angular/common/http'; 
+
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
@@ -32,7 +35,7 @@ export class ProductDetailComponent implements OnInit {
   product: Product | null = null;
   isLoading: boolean = true;
   errorMessage: string | null = null;
-
+  isAuthError: boolean = false; 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -49,11 +52,13 @@ export class ProductDetailComponent implements OnInit {
           this.isLoading = true;
           this.errorMessage = null;
           this.product = null;
+          this.isAuthError = false; 
           return this.productService.getProductById(id);
         } else {
           this.isLoading = false;
           const specificErrorMessage = 'No se especificó un ID de producto.';
           this.errorMessage = specificErrorMessage;
+          this.isAuthError = false;
           return throwError(() => new Error(specificErrorMessage));
         }
       })
@@ -61,13 +66,19 @@ export class ProductDetailComponent implements OnInit {
       next: (response: { result: Product }) => {
         this.product = response.result;
         this.isLoading = false;
+        this.isAuthError = false;
       },
-      error: (err: Error) => {
+      error: (err: any) => {
         this.isLoading = false;
-        if (err && err.message) {
+        if (err instanceof HttpErrorResponse && err.status === 401) {
+          this.errorMessage = 'Para ver los detalles completos de este producto, por favor inicia sesión o crea una cuenta.';
+          this.isAuthError = true; 
+        } else if (err && err.message && err.message === 'No se especificó un ID de producto.') {
             this.errorMessage = err.message;
+            this.isAuthError = false;
         } else {
-            this.errorMessage = 'Error al cargar los detalles del producto. Inténtalo de nuevo más tarde.';
+            this.errorMessage = 'Ocurrió un error al cargar los detalles del producto.';
+            this.isAuthError = false;
             console.error('Error fetching product by ID:', err);
         }
       }

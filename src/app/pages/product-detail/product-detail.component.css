@@ -204,3 +204,30 @@
     justify-content: flex-end; 
   }
 }
+.error-display-card mat-card-actions {
+  display: flex; /* Para que los botones puedan tener espacio entre ellos */
+  justify-content: center;
+  gap: 10px; /* Espacio entre los botones */
+  padding-bottom: 16px; /* Un poco de padding inferior */
+}
+
+.auth-action-button {
+  min-width: 130px;
+  font-weight: 500;
+}
+
+.register-button-style.mat-flat-button[color="accent"] {
+  background-color: #10B981; 
+  color: #FFFFFF;
+}
+.register-button-style.mat-flat-button[color="accent"]:hover {
+  background-color: #0D946F;
+}
+
+.auth-action-button.mat-stroked-button[color="primary"] {
+  color: #4F46E5;
+  border-color: rgba(79, 70, 229, 0.5);
+}
+.auth-action-button.mat-stroked-button[color="primary"]:hover {
+  background-color: rgba(79, 70, 229, 0.05);
+}

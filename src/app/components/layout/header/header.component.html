@@ -13,6 +13,7 @@
     <a mat-button href="#about">Sobre Nosotros</a>
     <a mat-button href="#contact">Contáctanos</a>
     <a mat-button routerLink="/admin/productos/crear" *ngIf="isLoggedIn && isAdmin">Crear Producto</a>
+     <a mat-button routerLink="/admin/servicios/crear" *ngIf="isLoggedIn && isAdmin">Crear Servicio</a>
   </div>
 
   <div class="toolbar-section actions-section hidden md:flex">
@@ -28,7 +29,7 @@
     <ng-container *ngIf="isLoggedIn">
       <button mat-button [matMenuTriggerFor]="userMenuDesktop">
         <mat-icon>account_circle</mat-icon>
-        {{ username || 'Mi Cuenta' }} <!-- Muestra username o 'Mi Cuenta' -->
+        {{ username || 'Mi Cuenta' }} 
       </button>
       <mat-menu #userMenuDesktop="matMenu">
         <button mat-menu-item routerLink="/profile">Perfil</button>
@@ -51,11 +52,11 @@
   <a mat-menu-item href="#about">Sobre Nosotros</a>
   <a mat-menu-item href="#contact">Contáctanos</a>
   <a mat-menu-item routerLink="/admin/productos/crear" *ngIf="isLoggedIn && isAdmin">
-    <mat-icon>add_circle_outline</mat-icon> <!-- Ícono de ejemplo -->
+    <mat-icon>add_circle_outline</mat-icon> 
     <span>Crear Producto</span>
   </a>
   <mat-divider></mat-divider>
-  <a mat-menu-item routerLink="/carrito"> <!-- Cambiado de href a routerLink si es una página -->
+  <a mat-menu-item routerLink="/carrito"> 
     <mat-icon>shopping_cart</mat-icon>
     <span>Carrito</span>
   </a>

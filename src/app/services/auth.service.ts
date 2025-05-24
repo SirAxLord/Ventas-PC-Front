@@ -1,7 +1,7 @@
-// src/app/services/auth.service.ts
-import { Injectable } from '@angular/core';
+import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http'; // 👈 IMPORTANTE: Asegúrate de tener HttpClientModule o provideHttpClient configurado
+import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
 import { jwtDecode } from 'jwt-decode';
 
@@ -12,11 +12,11 @@ interface DecodedToken {
   iat: number;
 }
 
-export interface AuthResponse { // Interfaz para la respuesta del login
+export interface AuthResponse {
   token: string;
   msg: string;
-  username?: string; // Opcional, si tu backend lo devuelve
-  role?: string;     // Opcional, si tu backend lo devuelve
+  username?: string;
+  role?: string;
 }
 
 @Injectable({
@@ -24,14 +24,14 @@ export interface AuthResponse { // Interfaz para la respuesta del login
 })
 export class AuthService {
   private readonly TOKEN_KEY = 'authToken';
-  private backendApiUrl = 'http://localhost:8080/api/auth'; // Ajusta si tu URL base es diferente
+  private backendApiUrl = 'http://localhost:8080/api/auth';
 
   constructor(
     private router: Router,
-    private http: HttpClient // 👈 Inyecta HttpClient
+    private http: HttpClient,
+    @Inject(PLATFORM_ID) private platformId: Object
   ) { }
 
-  // --- Métodos para llamadas HTTP ---
   login(credentials: any): Observable<AuthResponse> {
     return this.http.post<AuthResponse>(`${this.backendApiUrl}/login`, credentials).pipe(
       tap(response => {
@@ -42,22 +42,28 @@ export class AuthService {
     );
   }
 
-  register(userInfo: any): Observable<any> { // Define una interfaz para la respuesta si es necesario
+  register(userInfo: any): Observable<any> {
     return this.http.post<any>(`${this.backendApiUrl}/register`, userInfo);
   }
 
-  // --- Métodos de manejo de Token y estado ---
   private storeToken(token: string): void {
-    localStorage.setItem(this.TOKEN_KEY, token);
+    if (isPlatformBrowser(this.platformId)) {
+      localStorage.setItem(this.TOKEN_KEY, token);
+    }
   }
 
   logout(): void {
-    localStorage.removeItem(this.TOKEN_KEY);
+    if (isPlatformBrowser(this.platformId)) {
+      localStorage.removeItem(this.TOKEN_KEY);
+    }
     this.router.navigate(['/login']);
   }
 
   getToken(): string | null {
-    return localStorage.getItem(this.TOKEN_KEY);
+    if (isPlatformBrowser(this.platformId)) {
+      return localStorage.getItem(this.TOKEN_KEY);
+    }
+    return null;
   }
 
   private getDecodedToken(): DecodedToken | null {
@@ -76,24 +82,36 @@ export class AuthService {
   isLoggedIn(): boolean {
     const token = this.getToken();
     if (!token) return false;
-    const decodedToken = this.getDecodedToken();
-    if (decodedToken && decodedToken.exp) {
-      return decodedToken.exp * 1000 > Date.now();
+
+    if (isPlatformBrowser(this.platformId)) {
+        const decodedToken = this.getDecodedToken();
+        if (decodedToken && decodedToken.exp) {
+            return decodedToken.exp * 1000 > Date.now();
+        }
     }
     return false;
   }
 
   getUserRole(): string | null {
-    const decodedToken = this.getDecodedToken();
-    return decodedToken ? decodedToken.role : null;
+    if (isPlatformBrowser(this.platformId)) {
+        const decodedToken = this.getDecodedToken();
+        return decodedToken ? decodedToken.role : null;
+    }
+    return null;
   }
 
   getUsername(): string | null {
-    const decodedToken = this.getDecodedToken();
-    return decodedToken ? decodedToken.username : null;
+    if (isPlatformBrowser(this.platformId)) {
+        const decodedToken = this.getDecodedToken();
+        return decodedToken ? decodedToken.username : null;
+    }
+    return null;
   }
 
   isAdmin(): boolean {
-    return this.getUserRole() === 'admin';
+    if (isPlatformBrowser(this.platformId)) {
+        return this.getUserRole() === 'admin';
+    }
+    return false;
   }
 }

@@ -1,0 +1,53 @@
+<div class="service-detail-page-container">
+
+  <div *ngIf="isLoading" class="loading-container">
+    <mat-spinner diameter="60"></mat-spinner>
+    <p>Cargando detalles del servicio...</p>
+  </div>
+
+  <div *ngIf="!isLoading && errorMessage" class="error-container">
+    <mat-card class="error-display-card">
+      <mat-card-title>{{ isAuthError ? 'Acceso Requerido' : 'Error' }}</mat-card-title>
+      <mat-card-content>
+        <p>{{ errorMessage }}</p>
+      </mat-card-content>
+      
+      <mat-card-actions *ngIf="isAuthError">
+        <button mat-stroked-button color="primary" routerLink="/login" class="auth-action-button">Iniciar Sesión</button>
+        <button mat-flat-button color="accent" routerLink="/register" class="auth-action-button register-button-style">Registrarse</button>
+      </mat-card-actions>
+
+      <mat-card-actions *ngIf="!isAuthError && errorMessage !== 'No se especificó un ID de servicio.'">
+        <button mat-stroked-button (click)="goBack()">Volver</button>
+      </mat-card-actions>
+       <mat-card-actions *ngIf="errorMessage === 'No se especificó un ID de servicio.'">
+        <button mat-stroked-button routerLink="/">Ir a Inicio</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+
+  <mat-card *ngIf="!isLoading && service" class="service-detail-card">
+    <mat-card-header class="service-detail-header">
+      <div mat-card-avatar *ngIf="service.iconName" class="header-icon-container">
+        <mat-icon class="header-icon">{{ service.iconName }}</mat-icon>
+      </div>
+      <mat-card-title class="service-title">{{ service.title }}</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content class="service-description-section">
+      <h3>Descripción Detallada</h3>
+      <p>{{ service.description }}</p>
+    </mat-card-content>
+
+    <mat-card-actions class="service-actions-section" align="start">
+      <button mat-stroked-button (click)="goBack()" class="action-button back-button">
+        <mat-icon>arrow_back</mat-icon>
+        Volver
+      </button>
+      <button mat-raised-button color="primary" (click)="contactForService()" class="action-button contact-service-button">
+        <mat-icon>contact_mail</mat-icon>
+        Contactar por este Servicio
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>

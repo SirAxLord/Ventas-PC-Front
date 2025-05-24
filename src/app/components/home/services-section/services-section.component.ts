@@ -35,4 +35,9 @@ export class ServicesSectionComponent implements OnInit {
       }
     );
   }
+
+  handleServiceDeleted(deletedServiceId: string): void {
+    this.services = this.services.filter(service => service._id !== deletedServiceId);
+    console.log(`Servicio con ID ${deletedServiceId} eliminado de la lista en ServicesSectionComponent.`);
+  }
 }
