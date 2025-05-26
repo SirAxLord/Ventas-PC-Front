@@ -2,3 +2,36 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+/* En src/styles.css o src/styles.scss */
+
+/* Clase principal para el panel del Snackbar */
+.valenzos-snackbar {
+  background-color: #0A2A54; /* Tu azul oscuro principal de Valenzo's PC */
+  color: #FFFFFF; /* Texto blanco o un gris muy claro */
+  border-radius: 6px; /* Opcional: bordes redondeados */
+  /* box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12); */ /* Sombra opcional */
+}
+
+/* Estilo para el botón de acción (ej. "Cerrar", "Ok") dentro de tu Snackbar personalizado */
+/* Para Angular Material v15+ (componentes MDC) */
+.valenzos-snackbar .mat-mdc-button.mat-mdc-snack-bar-action {
+  color: #10B981; /* Tu color verde/turquesa de acento */
+  font-weight: bold;
+}
+
+.valenzos-snackbar .mat-mdc-button.mat-mdc-snack-bar-action:hover {
+  background-color: rgba(16, 185, 129, 0.1); /* Un hover sutil con el color de acento */
+}
+
+/* Estilos alternativos si usas una versión anterior de Angular Material (pre-MDC) */
+/* Puedes mantener ambos por si acaso, o solo el que corresponda a tu versión */
+.valenzos-snackbar .mat-simple-snackbar-action button {
+  color: #10B981; /* Tu color verde/turquesa de acento */
+  font-weight: bold;
+}
+
+.valenzos-snackbar .mat-simple-snackbar-action button:hover {
+  background-color: rgba(16, 185, 129, 0.1); /* Un hover sutil con el color de acento */
+}

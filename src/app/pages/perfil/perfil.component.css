@@ -1,0 +1,81 @@
+.profile-page-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* Para que la tarjeta empiece arriba */
+  min-height: calc(100vh - 64px); /* Ajusta 64px si tu header es diferente */
+  padding: 20px;
+  box-sizing: border-box;
+  background-color: #0A2A54;
+}
+
+.profile-card {
+  width: 100%;
+  max-width: 600px;
+  background-color: #FFFFFF;
+  border-radius: 8px;
+  /* El padding se maneja mejor con mat-card-title, mat-card-content, mat-card-actions */
+}
+
+.profile-main-title {
+  text-align: center;
+  padding: 24px 24px 16px 24px;
+  margin: 0; /* Quitar margen por defecto de hX si mat-card-title es un hX */
+  font-size: 1.8em;
+  font-weight: 600;
+  color: #0A2A54; /* Título oscuro */
+  border-bottom: 1px solid #e0e0e0; /* Separador sutil */
+}
+
+.profile-card mat-card-content {
+  padding: 16px 24px;
+  color: rgba(0,0,0,0.87); /* Color de texto por defecto para el contenido */
+}
+
+.profile-card mat-list-item .mat-mdc-list-item-line {
+  color: rgba(0,0,0,0.6); /* Color para el texto secundario en los items de la lista */
+}
+
+.profile-card mat-list-item mat-icon[matListItemIcon] {
+  color: rgba(0,0,0,0.54); /* Color para los iconos de la lista */
+}
+
+.user-role {
+  font-style: italic;
+  color: #374151; /* Un gris oscuro para el rol */
+}
+
+.profile-logout-section {
+  padding: 16px 24px;
+  margin-top: 8px; /* Espacio si hay contenido arriba */
+  border-top: 1px solid #e0e0e0; /* Separador antes del botón de logout */
+}
+
+.profile-logout-section button[mat-flat-button][color="warn"] {
+  min-width: 150px;
+  padding: 8px 16px;
+  font-weight: 500;
+  /* MatButton con color="warn" ya debería tener un color de fondo rojo y texto blanco */
+}
+.profile-logout-section button[mat-flat-button][color="warn"] mat-icon {
+  margin-right: 8px;
+}
+
+.profile-no-data {
+  text-align: center;
+  padding: 30px 24px;
+  color: #555;
+}
+
+.profile-no-data p {
+  margin-bottom: 16px;
+}
+
+.profile-no-data a {
+  color: #4F46E5; /* Color del enlace como en otros formularios */
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.profile-no-data a:hover {
+  text-decoration: underline;
+}

@@ -1,14 +1,15 @@
 import { Component } from '@angular/core';
-import { ProductService } from '../../services/product.service';
+import { ProductService, Product, ProductCreationData } from '../../services/product.service';
 import { Router } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
-// Importaciones de Angular Material
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card'; 
+import { MatCardModule } from '@angular/material/card';
+import { CdkTextareaAutosize } from '@angular/cdk/text-field';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-crear-producto',
@@ -19,10 +20,12 @@ import { MatCardModule } from '@angular/material/card';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    MatCardModule
+    MatCardModule,
+    CdkTextareaAutosize,
+    MatSnackBarModule 
   ],
   templateUrl: './crear-producto.component.html',
-  styleUrls: ['./crear-producto.component.css'] 
+  styleUrls: ['./crear-producto.component.css']
 })
 export class CrearProductoComponent {
   product: { title: string; description: string; price: number | null; iconName: string; image: string; } = {
@@ -33,37 +36,66 @@ export class CrearProductoComponent {
     image: ''
   };
 
-  successMessage: string | null = null;
-  errorMessage: string | null = null;
 
   constructor(
     private productService: ProductService,
-    private router: Router
+    private router: Router,
+    private snackBar: MatSnackBar 
   ) { }
 
-  onSubmit(): void {
-    this.successMessage = null;
-    this.errorMessage = null;
+  onSubmit(productForm?: NgForm): void {
+   
 
-    if (this.product.price === null) {
-        this.errorMessage = "El precio no puede estar vacío.";
+    if (productForm && !productForm.form.valid) {
+      this.snackBar.open("Por favor, completa todos los campos requeridos.", "Cerrar", { duration: 3000,panelClass: ['valenzos-snackbar'] });
+      Object.values(productForm.controls).forEach(control => {
+        control.markAsTouched();
+      });
+      return;
+    }
+    
+    if (this.product.price === null || this.product.price <= 0) {
+        this.snackBar.open("El precio no puede estar vacío y debe ser positivo.", "Cerrar", { duration: 3000,panelClass: ['valenzos-snackbar'] });
+        if (productForm?.controls['price']) {
+          productForm.controls['price'].setErrors({'incorrect': true});
+          productForm.controls['price'].markAsTouched();
+        }
         return;
     }
     
-    const productDataToSend = {
+    const iconNameToUse = (this.product.iconName && this.product.iconName.trim() !== '') 
+                          ? this.product.iconName 
+                          : 'inventory_2'; 
+
+    const productDataToSend: ProductCreationData = {
         title: this.product.title,
         description: this.product.description,
         price: this.product.price,
-        iconName: this.product.iconName,
+        iconName: iconNameToUse,
         image: this.product.image
     };
 
     this.productService.createProduct(productDataToSend).subscribe({
-      next: (response) => {
-        this.successMessage = `¡Producto "${response.title}" creado con éxito! ID: ${response._id}`;
+      next: (response: Product) => {
+        this.snackBar.open('Producto creado con éxito.', 'Ok', { duration: 3000, panelClass: ['valenzos-snackbar'] }); 
+        
+        this.product = { 
+          title: '', 
+          description: '', 
+          price: null, 
+          iconName: '', 
+          image: '' 
+        };
+        if (productForm) {
+          productForm.resetForm();
+        }
+        
+        this.router.navigate(['/']);
       },
       error: (error) => {
-        this.errorMessage = 'Error al crear el producto. ' + (error.error?.msg || '');
+        const errMessage = error.error?.msg || 'Error al crear el producto. Inténtalo de nuevo.';
+        this.snackBar.open(errMessage, 'Cerrar', { duration: 5000, panelClass: ['valenzos-snackbar'] });
+        console.error('Error al crear el producto:', error);
       }
     });
   }

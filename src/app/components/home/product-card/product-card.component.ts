@@ -47,6 +47,7 @@ export class ProductCardComponent {
         duration: 3000,
         horizontalPosition: 'center',
         verticalPosition: 'bottom',
+        panelClass: ['valenzos-snackbar']
       });
     }
   }
@@ -82,7 +83,7 @@ export class ProductCardComponent {
 
     this.productService.deleteProduct(this.product._id).subscribe({
       next: () => {
-        this.snackBar.open(`"${this.product.title}" eliminado correctamente.`, 'Cerrar', { duration: 3000 });
+        this.snackBar.open(`"${this.product.title}" eliminado correctamente.`, 'Cerrar', { duration: 3000, panelClass: ['valenzos-snackbar'] });
         this.productDeleted.emit(this.product._id);
       },
       error: (err) => {
@@ -93,7 +94,7 @@ export class ProductCardComponent {
         } else if (err.status === 403) {
             errorMessage = "No tienes permiso para eliminar este producto."
         }
-        this.snackBar.open(errorMessage, 'Cerrar', { duration: 4000 });
+        this.snackBar.open(errorMessage, 'Cerrar', { duration: 4000, panelClass: ['valenzos-snackbar'] });
       }
     });
   }

@@ -26,16 +26,6 @@
           </mat-error>
         </mat-form-field>
 
-        <mat-form-field appearance="outline" class="full-width-form-field">
-          <mat-label>Nombre del Ícono (Material Icons)</mat-label>
-          <input matInput formControlName="iconName" placeholder="Ej: build" required>
-          <mat-icon matSuffix>info_outline</mat-icon>
-          <mat-hint>Busca nombres de íconos en Google Fonts - Material Icons.</mat-hint>
-          <mat-error *ngIf="serviceForm.get('iconName')?.hasError('required')">
-            El nombre del ícono es requerido.
-          </mat-error>
-        </mat-form-field>
-        
         <div class="form-submit-actions">
           <button mat-stroked-button type="button" routerLink="/admin" class="cancel-button" [disabled]="isLoading">
             Cancelar

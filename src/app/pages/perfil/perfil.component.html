@@ -1,0 +1,37 @@
+<div class="profile-page-container">
+  <mat-card class="profile-card">
+    <mat-card-title class="profile-main-title">Mi Perfil</mat-card-title>
+    
+    <mat-card-content *ngIf="username">
+      <mat-list role="list">
+        <mat-list-item role="listitem">
+          <mat-icon matListItemIcon>account_circle</mat-icon>
+          <div matListItemTitle>Nombre de Usuario</div>
+          <div matListItemLine>{{ username }}</div>
+        </mat-list-item>
+
+        <mat-divider></mat-divider>
+
+        <mat-list-item role="listitem">
+          <mat-icon matListItemIcon>{{ userRole === 'admin' ? 'admin_panel_settings' : 'person' }}</mat-icon>
+          <div matListItemTitle>Rol de Usuario</div>
+          <div matListItemLine class="user-role">{{ userRole | titlecase }}</div>
+        </mat-list-item>
+      </mat-list>
+
+      </mat-card-content>
+
+    <mat-card-actions align="end" class="profile-logout-section" *ngIf="username">
+      <button mat-flat-button color="warn" (click)="logout()">
+        <mat-icon>logout</mat-icon>
+        Cerrar Sesión
+      </button>
+    </mat-card-actions>
+
+    <mat-card-content *ngIf="!username" class="profile-no-data">
+      <p>No se pudo cargar la información del perfil.</p>
+      <p>Por favor, intenta <a routerLink="/login">iniciar sesión</a> de nuevo.</p>
+    </mat-card-content>
+
+  </mat-card>
+</div>

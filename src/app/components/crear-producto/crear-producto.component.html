@@ -4,7 +4,7 @@
       <mat-card-title>Crear Nuevo Producto</mat-card-title>
     </mat-card-header>
     <mat-card-content>
-      <form (ngSubmit)="onSubmit()" #productForm="ngForm">
+      <form (ngSubmit)="onSubmit(productForm)" #productForm="ngForm">
         
         <mat-form-field appearance="outline" class="full-width">
           <mat-label>Título</mat-label>
@@ -31,14 +31,6 @@
         </mat-form-field>
 
         <mat-form-field appearance="outline" class="full-width">
-          <mat-label>Nombre del Ícono (ej. icon.svg)</mat-label>
-          <input matInput type="text" id="iconName" required [(ngModel)]="product.iconName" name="iconName" #iconName="ngModel">
-          <mat-error *ngIf="iconName.invalid && (iconName.dirty || iconName.touched)">
-            El nombre del ícono es requerido.
-          </mat-error>
-        </mat-form-field>
-
-        <mat-form-field appearance="outline" class="full-width">
           <mat-label>URL de la Imagen (ej. images/imagen.jpg)</mat-label>
           <input matInput type="text" id="image" required [(ngModel)]="product.image" name="image" #image="ngModel">
           <mat-error *ngIf="image.invalid && (image.dirty || image.touched)">
@@ -46,18 +38,10 @@
           </mat-error>
         </mat-form-field>
 
-        <div *ngIf="successMessage" class="success-message">
-          {{ successMessage }}
-        </div>
-        
-        <div *ngIf="errorMessage" class="error-message">
-          {{ errorMessage }}
-        </div>
-
+        <mat-card-actions align="end">
+          <button mat-raised-button color="primary" type="submit" [disabled]="!productForm.form.valid">Crear Producto</button>
+        </mat-card-actions>
       </form>
     </mat-card-content>
-    <mat-card-actions align="end">
-      <button mat-raised-button color="primary" type="submit" [disabled]="productForm.invalid" (click)="productForm.ngSubmit.emit()">Crear Producto</button>
-    </mat-card-actions>
   </mat-card>
 </div>

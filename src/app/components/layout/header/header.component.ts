@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
+import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { MatMenuModule } from '@angular/material/menu';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatDividerModule } from '@angular/material/divider';
-import { Router, RouterLink } from '@angular/router'; 
 import { AuthService } from '../../../services/auth.service'; 
 
 @Component({
@@ -13,20 +13,22 @@ import { AuthService } from '../../../services/auth.service';
   standalone: true,
   imports: [
     CommonModule,
-    MatToolbarModule,
+    RouterModule, 
+    MatMenuModule,
     MatButtonModule,
     MatIconModule,
-    MatMenuModule,
-    MatDividerModule,
-    RouterLink
+    MatToolbarModule,
+    MatDividerModule
   ],
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
 
- 
-  constructor(public authService: AuthService, private router: Router) { }
+  constructor(
+    public authService: AuthService,
+    private router: Router
+  ) {}
 
   get isLoggedIn(): boolean {
     return this.authService.isLoggedIn();
@@ -41,8 +43,11 @@ export class HeaderComponent {
   }
 
   logout(): void {
-    console.log('Cerrar Sesión clickeado');
     this.authService.logout();
-   
+  }
+
+  navigateToProfile(): void {
+    console.log('HeaderComponent: Intentando navegar a /perfil programáticamente...');
+    this.router.navigate(['/perfil']);
   }
 }

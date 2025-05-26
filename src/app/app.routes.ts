@@ -9,6 +9,9 @@ import { ProductDetailComponent } from './pages/product-detail/product-detail.co
 import { ServiceDetailComponent } from './pages/service-detail/service-detail.component';
 import { CreateServiceComponent } from './pages/create-service/create-service.component';
 import { EditServiceComponent } from './pages/edit-service/edit-service.component';
+import { PerfilComponent } from './pages/perfil/perfil.component';
+import { authGuard } from './services/auth.guard'; // Asegúrate de que la ruta sea correcta
+
 
 export const routes: Routes = [
   {
@@ -51,6 +54,11 @@ export const routes: Routes = [
 {
     path: 'admin/servicios/editar/:id', 
     component: EditServiceComponent
+  },
+  {
+    path: 'perfil',
+    component: PerfilComponent, // 👈 USA EL NOMBRE DE TU COMPONENTE
+    canActivate: [authGuard]    // 👈 APLICA EL GUARDIA
   },
 
   {

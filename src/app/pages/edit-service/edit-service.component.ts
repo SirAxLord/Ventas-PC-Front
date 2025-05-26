@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router, ActivatedRoute, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { HttpErrorResponse } from '@angular/common/http';
-import { switchMap, filter, take } from 'rxjs/operators';
+import { switchMap, take } from 'rxjs/operators';
+import { throwError } from 'rxjs';
 
 import { ServiceService, Service, ServiceCreationData } from '../../services/service.service';
 
@@ -14,6 +15,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 
 @Component({
   selector: 'app-edit-service',
@@ -27,17 +29,20 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatInputModule,
     MatButtonModule,
     MatIconModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatSnackBarModule,
+    CdkTextareaAutosize
   ],
   templateUrl: './edit-service.component.html',
-  styleUrls: ['./edit-service.component.css'] 
+  styleUrls: ['./edit-service.component.css']
 })
 export class EditServiceComponent implements OnInit {
   serviceForm!: FormGroup;
   serviceId: string | null = null;
-  isLoading: boolean = true; 
-  isSaving: boolean = false;  
-  initialFormValue: string = '';
+  isLoading: boolean = true;
+  isSaving: boolean = false;
+  initialFormValueString: string = '';
+  initialErrorMessage: string | null = null;
 
   constructor(
     private fb: FormBuilder,
@@ -51,54 +56,84 @@ export class EditServiceComponent implements OnInit {
     this.serviceForm = this.fb.group({
       title: ['', [Validators.required, Validators.minLength(3)]],
       description: ['', [Validators.required, Validators.minLength(10)]],
-      iconName: ['', Validators.required]
+      iconName: ['']
     });
 
     this.route.paramMap.pipe(
-      take(1), 
+      take(1),
       switchMap(params => {
         this.serviceId = params.get('id');
         if (this.serviceId) {
           this.isLoading = true;
+          this.initialErrorMessage = null;
           return this.serviceService.getServiceById(this.serviceId);
         } else {
           this.isLoading = false;
-          this.snackBar.open('ID de servicio no encontrado.', 'Cerrar', { duration: 3000 });
-          this.router.navigate(['/admin']); 
-          return []; 
+          const specificErrorMessage = 'ID de servicio no encontrado.';
+          this.initialErrorMessage = specificErrorMessage;
+          this.router.navigate(['/admin']);
+          return throwError(() => new Error(specificErrorMessage));
         }
       })
     ).subscribe({
-      next: (response: { result: Service }) => { 
+      next: (response: { result: Service }) => {
         const serviceData = response.result;
         if (serviceData) {
           this.serviceForm.patchValue({
             title: serviceData.title,
             description: serviceData.description,
-            iconName: serviceData.iconName
+            iconName: serviceData.iconName || ''
           });
-          this.initialFormValue = JSON.stringify(this.serviceForm.value); 
+          this.initialFormValueString = JSON.stringify(this.serviceForm.value);
         } else {
-          this.snackBar.open('Servicio no encontrado.', 'Cerrar', { duration: 3000 });
+          this.initialErrorMessage = 'Servicio no encontrado.';
           this.router.navigate(['/admin']);
         }
         this.isLoading = false;
       },
       error: (err: any) => {
         this.isLoading = false;
-        console.error('Error al cargar el servicio:', err);
-        let message = 'No se pudo cargar el servicio.';
         if (err instanceof HttpErrorResponse && err.status === 401) {
-          message = 'No tienes autorización para ver este servicio.';
+          this.initialErrorMessage = 'No tienes autorización para ver este servicio.';
+        } else if (err && err.message) {
+            this.initialErrorMessage = err.message;
+        } else {
+          this.initialErrorMessage = 'No se pudo cargar la información del servicio.';
         }
-        this.snackBar.open(message, 'Cerrar', { duration: 5000 });
-        this.router.navigate(['/admin']); 
+        console.error('Error al cargar el servicio:', err);
       }
     });
   }
 
+  loadServiceData(id: string): void {
+    this.isLoading = true;
+    this.initialErrorMessage = null;
+    this.serviceService.getServiceById(id).subscribe({
+        next: (response) => {
+            const serviceData = response.result;
+            if (serviceData) {
+                this.serviceForm.patchValue({
+                    title: serviceData.title,
+                    description: serviceData.description,
+                    iconName: serviceData.iconName || ''
+                });
+                this.initialFormValueString = JSON.stringify(this.serviceForm.value);
+            } else {
+                this.initialErrorMessage = 'Servicio no encontrado al reintentar.';
+            }
+            this.isLoading = false;
+        },
+        error: (err) => {
+            this.isLoading = false;
+            this.initialErrorMessage = 'No se pudo recargar el servicio.';
+            console.error('Error al recargar el servicio:', err);
+        }
+    });
+  }
+
   get formChanged(): boolean {
-    return JSON.stringify(this.serviceForm.value) !== this.initialFormValue;
+    if (!this.serviceForm || !this.serviceForm.value) return false;
+    return JSON.stringify(this.serviceForm.value) !== this.initialFormValueString;
   }
 
   onSubmit(): void {
@@ -113,22 +148,27 @@ export class EditServiceComponent implements OnInit {
       return;
     }
 
-    if (!this.formChanged && !this.serviceForm.dirty) { 
+    if (!this.formChanged && !this.serviceForm.dirty) {
       this.snackBar.open('No se han detectado cambios.', 'Cerrar', { duration: 3000 });
-      this.isSaving = false;
       return;
     }
 
     this.isSaving = true;
-    const serviceDataToUpdate: ServiceCreationData = this.serviceForm.value;
+    const formValue = this.serviceForm.value;
+    
+    const serviceDataToUpdate: ServiceCreationData = {
+      title: formValue.title,
+      description: formValue.description,
+      iconName: (formValue.iconName && formValue.iconName.trim() !== '') ? formValue.iconName : 'settings_suggest'
+    };
 
     this.serviceService.updateService(this.serviceId, serviceDataToUpdate).subscribe({
       next: () => {
         this.isSaving = false;
         this.snackBar.open(`Servicio "${serviceDataToUpdate.title}" actualizado con éxito.`, 'Ok', { duration: 3000 });
-        this.initialFormValue = JSON.stringify(this.serviceForm.value); 
-        this.serviceForm.markAsPristine(); 
-       
+        this.initialFormValueString = JSON.stringify(this.serviceForm.value);
+        this.serviceForm.markAsPristine();
+        this.router.navigate(['/']);
       },
       error: (err) => {
         this.isSaving = false;

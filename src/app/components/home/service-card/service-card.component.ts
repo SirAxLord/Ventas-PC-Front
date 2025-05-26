@@ -44,7 +44,7 @@ export class ServiceCardComponent {
 
 
   openDeleteServiceConfirmDialog(event: MouseEvent): void {
-    event.stopPropagation(); // Si la tarjeta entera fuera clickeable
+    event.stopPropagation(); 
     
     const dialogRef = this.dialog.open<ConfirmDialogComponent, ConfirmDialogData>(ConfirmDialogComponent, {
       width: '400px',
@@ -68,7 +68,7 @@ export class ServiceCardComponent {
 
     this.serviceService.deleteService(this.service._id).subscribe({
       next: () => {
-        this.snackBar.open(`Servicio "${this.service.title}" eliminado correctamente.`, 'Cerrar', { duration: 3000 });
+        this.snackBar.open(`Servicio "${this.service.title}" eliminado correctamente.`, 'Cerrar', { duration: 3000, panelClass: ['valenzos-snackbar'] });
         this.serviceDeleted.emit(this.service._id);
       },
       error: (err) => {
@@ -79,7 +79,7 @@ export class ServiceCardComponent {
         } else if (err.status === 403) {
             errorMessage = "No tienes permiso para eliminar este servicio."
         }
-        this.snackBar.open(errorMessage, 'Cerrar', { duration: 4000 });
+        this.snackBar.open(errorMessage, 'Cerrar', { duration: 4000, panelClass: ['valenzos-snackbar'] });
       }
     });
   }

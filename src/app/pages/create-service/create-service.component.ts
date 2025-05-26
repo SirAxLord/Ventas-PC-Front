@@ -2,17 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
-import { ServiceService, ServiceCreationData } from '../../services/service.service';
+import { ServiceService, ServiceCreationData, Service } from '../../services/service.service';
 
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon'; 
+import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-
 
 @Component({
   selector: 'app-create-service',
@@ -26,15 +25,15 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatInputModule,
     MatButtonModule,
     MatIconModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatSnackBarModule
   ],
   templateUrl: './create-service.component.html',
   styleUrls: ['./create-service.component.css']
 })
 export class CreateServiceComponent implements OnInit {
-  serviceForm!: FormGroup; 
+  serviceForm!: FormGroup;
   isLoading: boolean = false;
-  
 
   constructor(
     private fb: FormBuilder,
@@ -47,26 +46,32 @@ export class CreateServiceComponent implements OnInit {
     this.serviceForm = this.fb.group({
       title: ['', [Validators.required, Validators.minLength(3)]],
       description: ['', [Validators.required, Validators.minLength(10)]],
-      iconName: ['', Validators.required] 
+      iconName: ['']
     });
   }
 
   onSubmit(): void {
     if (this.serviceForm.invalid) {
-      this.serviceForm.markAllAsTouched(); // Marcar todos los campos para mostrar errores
-      this.snackBar.open('Por favor, corrige los errores en el formulario.', 'Cerrar', { duration: 3000 });
+      this.serviceForm.markAllAsTouched();
+      this.snackBar.open('Por favor, completa los campos requeridos correctamente.', 'Cerrar', { duration: 3000 });
       return;
     }
 
     this.isLoading = true;
-    const serviceData: ServiceCreationData = this.serviceForm.value;
+    const formValue = this.serviceForm.value;
+    
+    const serviceData: ServiceCreationData = {
+      title: formValue.title,
+      description: formValue.description,
+      iconName: (formValue.iconName && formValue.iconName.trim() !== '') ? formValue.iconName : 'settings_suggest'
+    };
 
     this.serviceService.createService(serviceData).subscribe({
-      next: (newService) => {
+      next: (newService: any) => {
         this.isLoading = false;
-        this.snackBar.open(`Servicio "${newService.title}" creado con éxito.`, 'Ok', { duration: 3000 });
+        this.snackBar.open('Servicio creado con éxito.', 'Ok', { duration: 3000 });
         this.serviceForm.reset();
-        
+        this.router.navigate(['/']);
       },
       error: (err) => {
         this.isLoading = false;
