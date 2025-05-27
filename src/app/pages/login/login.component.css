@@ -13,8 +13,8 @@
   max-width: 420px;
   background-color: #FFFFFF;
   border-radius: 8px;
-  /* Considera añadir padding aquí si los campos están muy pegados a los bordes de la tarjeta */
-  /* padding: 20px; */
+  padding: 20px;
+  box-sizing: border-box;
 }
 
 .form-title {
