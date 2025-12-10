@@ -1,59 +1,89 @@
-# ValenzosPC
+# Valenzos PC — Frontend (Angular)
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.9.
+Aplicación web en Angular para la venta y gestión de productos y servicios de computación. Incluye catálogo, detalle de productos y servicios, carrito de compras, autenticación de usuarios, perfil protegido y panel básico de administración para crear/editar productos y servicios. El proyecto está configurado con Angular Material y renderizado del lado del servidor (SSR) para mejor rendimiento y SEO.
 
-## Development server
+## Stack Principal
+- Framework: Angular 19
+- UI: Angular Material (+ CDK)
+- Estado y utilidades: RxJS
+- SSR: `@angular/ssr` con `express`
 
-To start a local development server, run:
+## Características
+- Catálogo: listado y tarjetas de productos/servicios en la home.
+- Detalle: páginas de detalle para `producto/:id` y `servicio/:id`.
+- Carrito: gestión básica del carrito en `carrito`.
+- Autenticación: login y registro; `authGuard` protege la ruta `perfil`.
+- Perfil: página de usuario autenticado (`/perfil`).
+- Administración: crear/editar productos y servicios:
+  - `admin/productos/crear`, `admin/productos/editar/:id`
+  - `admin/servicios/crear`, `admin/servicios/editar/:id`
+- SSR y prerender: configuración en `angular.json` con entrada `src/server.ts`.
 
-```bash
-ng serve
-```
+## Rutas Principales
+- `/` → Home (`HomePageComponent`)
+- `/login` → Login
+- `/register` → Registro
+- `/carrito` → Carrito
+- `/producto/:id` → Detalle de producto
+- `/servicio/:id` → Detalle de servicio
+- `/perfil` → Perfil (protegido por `authGuard`)
+- `/admin/productos/crear` → Crear producto
+- `/admin/productos/editar/:id` → Editar producto
+- `/admin/servicios/crear` → Crear servicio
+- `/admin/servicios/editar/:id` → Editar servicio
+- `**` → Redirección a `/`
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## Scripts (package.json)
+- `start`: ejecuta `ng serve` en desarrollo.
+- `build`: compila la app (`dist/valenzos-pc`).
+- `watch`: compila en modo watch (dev).
+- `test`: ejecuta tests con Karma/Jasmine.
+- `serve:ssr:ValenzosPC`: sirve la build SSR (`node dist/valenzos-pc/server/server.mjs`).
 
-## Code scaffolding
+## Inicio Rápido
+1. Requisitos: Node.js 18+ y Angular CLI instalado globalmente.
+2. Instalar dependencias:
+	```powershell
+	npm install
+	```
+3. Desarrollo (HMR):
+	```powershell
+	npm start
+	```
+4. Build producción:
+	```powershell
+	npm run build
+	```
+5. SSR (después de build):
+	```powershell
+	npm run serve:ssr:ValenzosPC
+	```
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## Tecnologías y Dependencias
+- `@angular/*` 19, `@angular/material`, `@angular/cdk`
+- `@angular/ssr`, `express` para servidor SSR
+- `rxjs`, `zone.js`, `tslib`
+- Dev: `@angular/cli`, `@angular-devkit/build-angular`, `typescript`, Karma/Jasmine
+- Estilos: tema Material preconstruido `magenta-violet`
 
-```bash
-ng generate component component-name
-```
+## Estructura del Proyecto
+- `src/app/pages`: vistas (home, login, register, carrito, perfil, detalle producto/servicio, crear/editar servicio)
+- `src/app/components`: componentes (crear/editar producto, diálogos, tarjetas)
+- `src/app/services`: servicios (`auth.service`, `product.service`, `service.service`, `cart.service`) y `auth.guard`
+- `src`: `main.ts`, `main.server.ts`, `server.ts`, `index.html`, `styles.css`
+- `public`: assets estáticos copiados al build
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## Notas SSR
+- `angular.json` define `ssr.entry` en `src/server.ts` y tiene `prerender: true`.
+- Para producción, servir `dist/valenzos-pc` con `serve:ssr:ValenzosPC`.
 
-```bash
-ng generate --help
-```
+## Pruebas
+- Configuradas con Karma y Jasmine.
+- Ejecutar: `npm test`.
 
-## Building
+## Convenciones
+- Prefijo de componentes: `app-`.
+- Rutas y guard en `src/app/app.routes.ts`.
 
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## Licencia
+Uso interno del proyecto Valenzos PC.
